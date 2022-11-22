@@ -4,12 +4,15 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
 
 const AuthForm = (props) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isNewUser, setIsNewUser] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  // const navigate = useNavigate();
+
   const handleEmailInputChange = (e) => {
     setEmailInput(e.target.value);
   };
@@ -23,69 +26,66 @@ const AuthForm = (props) => {
     setPasswordInput("");
     setIsNewUser(true);
     setErrorMessage("");
+    // navigate("/");
   };
 
-     const setErrorState = (error) => {
-       setErrorMessage(error.message);
-     };
+  const setErrorState = (error) => {
+    setErrorMessage(error.message);
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!emailInputValue || !passwordInputValue) return;
+  const handleSubmit = (event) => {
+    console.log("button");
 
-    
- 
+    if (!emailInput || !passwordInput) return;
+
     if (isNewUser) {
-      createUserWithEmailAndPassword(auth, emailInput, passwordInput)
+      return createUserWithEmailAndPassword(auth, emailInput, passwordInput)
         .then(closeAuthForm)
         .catch(setErrorState);
     } else {
-      signInWithEmailAndPassword(auth, emailInput, passwordInput)
+      return signInWithEmailAndPassword(auth, emailInput, passwordInput)
         .then(closeAuthForm)
         .catch(setErrorState);
     }
   };
 
   const toggleNewOrReturningAuth = () => {
-    setIsNewUser(false);
+    setIsNewUser(!isNewUser);
   };
 
   return (
     <div>
       <h1>Sales of HDB Flats</h1>
       <p>{errorMessage ? `${errorMessage}` : null}</p>
-      <form>
-        <label>
-          <input
-            type="email"
-            name="emailInput"
-            value={emailInput}
-            onChange={handleEmailInputChange}
-            placeholder="Email"
-          />
-        </label>
-        <br />
-        <label>
-          <input
-            type="password"
-            name="passwordInput"
-            value={passwordInput}
-            onChange={handlePasswordInputChange}
-            minLength={6}
-            placeholder="Password"
-          />
-        </label>
-        <br />
-        <button onClick={handleSubmit}>
-          {isNewUser ? "Sign Up" : "Log In"}
-        </button>
-        <br />
-        <button variant="link" onClick={toggleNewOrReturningAuth}>
-          {isNewUser
-            ? "Have an account? Log In"
-            : "Don't have an account? Sign Up"}
-        </button>
-      </form>
+
+      <label>
+        <input
+          type="email"
+          name="emailInput"
+          value={emailInput}
+          onChange={handleEmailInputChange}
+          placeholder="Email"
+        />
+      </label>
+      <br />
+      <label>
+        <input
+          type="password"
+          name="passwordInput"
+          value={passwordInput}
+          onChange={handlePasswordInputChange}
+          minLength={6}
+          placeholder="Password"
+        />
+      </label>
+      <br />
+      <button onClick={handleSubmit}>{isNewUser ? "Sign Up" : "Log In"}</button>
+      <br />
+      <button variant="link" onClick={toggleNewOrReturningAuth}>
+        {isNewUser
+          ? "Have an account? Log In"
+          : "Don't have an account? Sign Up"}
+      </button>
     </div>
   );
 };
