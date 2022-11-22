@@ -1,3 +1,5 @@
+import "./App.css";
+import AuthForm from "./components/AuthForm.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
@@ -21,6 +23,8 @@ function App() {
   //   });
   // }, []);
 
+  const authForm = <AuthForm />;
+
   const composerAndTransFeed = (
     <div>
       <Composer />
@@ -35,6 +39,7 @@ function App() {
       <header className="App-header">
         <Routes>
           <Route path="/" element={composerAndTransFeed} />
+          <Route path="authform" element={AuthForm} />
         </Routes>
       </header>
     </div>
