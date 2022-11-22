@@ -5,7 +5,7 @@ import {
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import { database, storage } from "./firebase";
+import { database, storage } from "../firebase";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
@@ -20,8 +20,7 @@ const defaultState = {
   resalePrice: 0,
 };
 
-const Composer = () => {
-  const loggedInUserEmail = "br.networkers@gmail.com";
+const Composer = ({ loggedInUser }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
   const [state, setState] = useState(defaultState);
@@ -67,7 +66,7 @@ const Composer = () => {
         set(newMessageRef, {
           imageLink: downloadUrl,
           createdAt: new Date().toLocaleDateString("en-GB"),
-          authorEmail: loggedInUserEmail,
+          authorEmail: this.props.loggedInUser.email,
           block: state.block,
           streetName: state.streetName,
           floorLevel: state.floorLevel,
@@ -87,7 +86,7 @@ const Composer = () => {
 
   return (
     <form>
-      {/* <p>Signed in as: {loggedInUser ? loggedInUser.email : null}</p>  */}
+      <p>Signed in as: {loggedInUser ? loggedInUser.email : null}</p>
       <input
         type="file"
         value={fileInputValue}

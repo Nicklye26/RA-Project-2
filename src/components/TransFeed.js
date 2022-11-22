@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { onChildAdded, ref as databaseRef } from "firebase/database";
-import { database } from "./firebase";
+import { database } from "../firebase";
 import "./App.css";
 
 const MESSAGE_FOLDER_NAME = "messages";
