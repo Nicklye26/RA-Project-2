@@ -67,3 +67,8 @@ button {
   cursor: pointer;
   border-radius: 12px;
 }
+
+.storage-image {
+  width: 50vw;
+  height: 30vh;
+}

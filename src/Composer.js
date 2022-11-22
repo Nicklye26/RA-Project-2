@@ -74,7 +74,8 @@ const Composer = () => {
           floorArea: parseInt(state.floorArea),
           resalePrice: parseInt(state.resalePrice),
           yearLeaseStart: parseInt(state.yearLeaseStart),
-          remaingLease: 99 - (new Date().getFullYear() - state.yearLeaseStart),
+          remainingLease:
+            99 - (new Date().getFullYear() - state.yearLeaseStart),
         });
         // Reset input fields after submit
         setFileInputFile(null);

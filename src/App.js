@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Composer from "./Composer.js";
+import TransFeed from "./TransFeed.js";
 
 function App() {
   // Code to use later for checking whether user is logged in
@@ -20,12 +21,20 @@ function App() {
   //   });
   // }, []);
 
+  const composerAndTransFeed = (
+    <div>
+      <Composer />
+      <br />
+      <TransFeed />
+    </div>
+  );
+
   const composer = <Composer />;
   return (
     <div className="App">
       <header className="App-header">
         <Routes>
-          <Route path="/" element={composer} />
+          <Route path="/" element={composerAndTransFeed} />
         </Routes>
       </header>
     </div>
