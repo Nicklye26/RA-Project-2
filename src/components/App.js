@@ -41,14 +41,24 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Routes>
-          <Route path="/" element={composerAndTransFeed} />
-          <Route path="authform" element={authForm} />
-        </Routes>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <header className="App-header">
+          <div className="Navbar">
+            <div>
+              <img
+                src={require("../assets/Sales-of-Flats-Logo.png")}
+                alt="Website-Logo"
+              />
+            </div>
+          </div>
+          <Routes>
+            <Route path="/" element={composerAndTransFeed} />
+            <Route path="authform" element={authForm} />
+          </Routes>
+        </header>
+      </div>
+    </>
   );
 }
 

@@ -85,81 +85,83 @@ const Composer = ({ loggedInUser }) => {
   };
 
   return (
-    <form>
-      <p>Signed in as: {loggedInUser ? loggedInUser.email : null}</p>
-      <input
-        type="file"
-        value={fileInputValue}
-        onChange={handleFileInputChange}
-      />
-      <div className="inputBoxes">
-        <label className="labelClass">Block No: </label>
+    <>
+      <p>{loggedInUser ? loggedInUser.email : null}</p>
+      <form>
         <input
-          className="boxClass"
-          name="block"
-          type="text"
-          maxLength="4"
-          value={state.block}
-          onChange={handleTextInputChange}
+          type="file"
+          value={fileInputValue}
+          onChange={handleFileInputChange}
         />
-        <label className="labelClass">Street Name: </label>
-        <input
-          className="boxClass"
-          name="streetName"
-          type="text"
-          value={state.streetName}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass"> Floor Level: </label>
-        <div onChange={handleTextInputChange}>
-          <select name="selectlist" id="selectlist">
-            <option value="option" name="floorLevel">
-              1 to 4
-            </option>
-            <option value="option" name="floorLevel">
-              5 to 7
-            </option>
-            <option value="option" name="floorLevel">
-              8 to 11
-            </option>
-            <option value="option" name="floorLevel">
-              12 and above
-            </option>
-          </select>
+        <div className="inputBoxes">
+          <label className="labelClass">Block No: </label>
+          <input
+            className="boxClass"
+            name="block"
+            type="text"
+            maxLength="4"
+            value={state.block}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass">Street Name: </label>
+          <input
+            className="boxClass"
+            name="streetName"
+            type="text"
+            value={state.streetName}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass"> Floor Level: </label>
+          <div onChange={handleTextInputChange}>
+            <select name="selectlist" id="selectlist">
+              <option value="option" name="floorLevel">
+                1 to 4
+              </option>
+              <option value="option" name="floorLevel">
+                5 to 7
+              </option>
+              <option value="option" name="floorLevel">
+                8 to 11
+              </option>
+              <option value="option" name="floorLevel">
+                12 and above
+              </option>
+            </select>
+          </div>
+          <label className="labelClass">Floor Area: </label>
+          <input
+            className="boxClass"
+            name="floorArea"
+            type="number"
+            min="0"
+            max="300"
+            value={state.floorArea}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass">Year Lease Start: </label>
+          <input
+            className="boxClass"
+            name="yearLeaseStart"
+            type="number"
+            min="1980"
+            max="2017"
+            value={state.yearLeaseStart}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass">Resale Price: </label>
+          <input
+            className="boxClass"
+            name="resalePrice"
+            type="number"
+            min="0"
+            max="2000000"
+            value={state.resalePrice}
+            onChange={handleTextInputChange}
+          />
         </div>
-        <label className="labelClass">Floor Area: </label>
-        <input
-          className="boxClass"
-          name="floorArea"
-          type="number"
-          min="0"
-          max="300"
-          value={state.floorArea}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass">Year Lease Start: </label>
-        <input
-          className="boxClass"
-          name="yearLeaseStart"
-          type="number"
-          min="1980"
-          max="2017"
-          value={state.yearLeaseStart}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass">Resale Price: </label>
-        <input
-          className="boxClass"
-          name="resalePrice"
-          type="number"
-          min="0"
-          max="2000000"
-          value={state.resalePrice}
-          onChange={handleTextInputChange}
-        />
-      </div>
-      <button onClick={handleSubmit}>Send</button>
-    </form>
+        <button onClick={handleSubmit}>Send</button>
+      </form>
+    </>
   );
 };
 
