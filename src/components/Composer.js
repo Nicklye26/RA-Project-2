@@ -15,9 +15,9 @@ const defaultState = {
   block: "",
   streetName: "",
   floorLevel: "1 to 4",
-  floorArea: 0,
-  yearLeaseStart: 1990,
-  resalePrice: 0,
+  floorArea: "",
+  yearLeaseStart: "",
+  resalePrice: "",
 };
 
 const Composer = ({ loggedInUser }) => {
@@ -66,7 +66,7 @@ const Composer = ({ loggedInUser }) => {
         set(newMessageRef, {
           imageLink: downloadUrl,
           createdAt: new Date().toLocaleDateString("en-GB"),
-          authorEmail: this.props.loggedInUser.email,
+          authorEmail: loggedInUser.email,
           block: state.block,
           streetName: state.streetName,
           floorLevel: state.floorLevel,
@@ -88,11 +88,6 @@ const Composer = ({ loggedInUser }) => {
     <>
       <p>{loggedInUser ? loggedInUser.email : null}</p>
       <form>
-        <input
-          type="file"
-          value={fileInputValue}
-          onChange={handleFileInputChange}
-        />
         <div className="inputBoxes">
           <label className="labelClass">Block No: </label>
           <input
@@ -128,7 +123,7 @@ const Composer = ({ loggedInUser }) => {
               </option>
             </select>
           </div>
-          <label className="labelClass">Floor Area: </label>
+          <label className="labelClass">Floor Area (sqm): </label>
           <input
             className="boxClass"
             name="floorArea"
@@ -147,8 +142,9 @@ const Composer = ({ loggedInUser }) => {
             max="2017"
             value={state.yearLeaseStart}
             onChange={handleTextInputChange}
+            placeholder="example: 1990"
           />
-          <label className="labelClass">Resale Price: </label>
+          <label className="labelClass">Resale Price (SGD): </label>
           <input
             className="boxClass"
             name="resalePrice"
@@ -158,8 +154,16 @@ const Composer = ({ loggedInUser }) => {
             value={state.resalePrice}
             onChange={handleTextInputChange}
           />
+          <input
+            type="file"
+            value={fileInputValue}
+            multiple
+            onChange={handleFileInputChange}
+          />
         </div>
-        <button onClick={handleSubmit}>Send</button>
+        <button>Edit</button>
+        <button onClick={handleSubmit}>Create</button>
+        <button>Delete</button>
       </form>
     </>
   );

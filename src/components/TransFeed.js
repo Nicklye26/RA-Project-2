@@ -4,8 +4,15 @@ import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "../firebase";
 import "./App.css";
 import "../components/Transfeed.css";
+import AuthForm from "./AuthForm";
 
 const MESSAGE_FOLDER_NAME = "messages";
+
+// Click on post to link to full details of post
+// const handleSubmit = () => {
+//   const authForm = <AuthForm />
+//   <Link to="authForm"></Link>
+// }
 
 const TransFeed = () => {
   const [messages, setMessages] = useState([]);
@@ -41,8 +48,6 @@ const TransFeed = () => {
   //   ));
   // };
 
-  // table format
-  // cannot use table to display, but using it now temporarily
   return (
     <div className="Transfeed-Table">
       <div className="Flex-Row">
@@ -67,63 +72,17 @@ const TransFeed = () => {
       </div>
 
       {messages.map((message, val) => (
-        <div className="Flex-Row">
-          <div>{message.val.block}</div>
-          <div>{message.val.streetName}</div>
-          <div>{message.val.floorLevel}</div>
-          <div>{message.val.floorArea}</div>
-          <div> {message.val.remainingLease}</div>
-          <div>{message.val.resalePrice}</div>
+        <div className="Flex-Row" key={val}>
+          <div className="Block-Row">{message.val.block}</div>
+          <div className="Street-Name">{message.val.streetName}</div>
+          <div className="Floor Level">{message.val.floorLevel}</div>
+          <div className="Floor Area">{message.val.floorArea}</div>
+          <div className="Remaining Lease">{message.val.remainingLease}</div>
+          <div className="Resale Price">{message.val.resalePrice}</div>
         </div>
       ))}
     </div>
   );
 };
-
-// <tbody>
-//   <tr>
-//     <th>Block</th>
-//     <th>Street Name</th>
-//     <th>Floor Level</th>
-//     <th>Floor Area</th>
-//     <th>Remaining Lease</th>
-//     <th>Resale Price</th>
-//   </tr>
-//   {messages.map((message, val) => (
-//     <tr key={val}>
-//       <td>{message.val.block}</td>
-//       <td>{message.val.streetName}</td>
-//       <td>{message.val.floorLevel}</td>
-//       <td>{message.val.floorArea}</td>
-//       <td>{message.val.remainingLease}</td>
-//       <td>{message.val.resalePrice}</td>
-//     </tr>
-//   ))}
-// </tbody>
-
-// table format using div
-//   return (
-//     <div>
-//       <div>
-//         <div>Block</div>
-//         <div>Street Name</div>
-//         <div>Floor Level</div>
-//         <div>Floor Area</div>
-//         <div>Remaining Lease</div>
-//         <div>Resale Price</div>
-//       </div>
-//       {messages.map((message, val) => (
-//         <div key={val}>
-//           <div>{message.val.block}</div>
-//           <div>{message.val.streetName}</div>
-//           <div>{message.val.floorLevel}</div>
-//           <div>{message.val.floorArea}</div>
-//           <div>{message.val.remainingLease}</div>
-//           <div>{message.val.resalePrice}</div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
 
 export default TransFeed;
