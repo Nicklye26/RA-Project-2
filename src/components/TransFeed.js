@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "../firebase";
 import "./App.css";
+import "../components/Transfeed.css";
 
 const MESSAGE_FOLDER_NAME = "messages";
 
@@ -43,28 +44,62 @@ const TransFeed = () => {
   // table format
   // cannot use table to display, but using it now temporarily
   return (
-    <tbody>
-      <tr>
-        <th>Block</th>
-        <th>Street Name</th>
-        <th>Floor Level</th>
-        <th>Floor Area</th>
-        <th>Remaining Lease</th>
-        <th>Resale Price</th>
-      </tr>
+    <div className="Transfeed-Table">
+      <div className="Flex-Row">
+        <div className="Block-Row">
+          <h3>Block</h3>
+        </div>
+        <div className="Street-Name">
+          <h3>Street Name</h3>
+        </div>
+        <div className="Floor Level">
+          <h3>Floor Level</h3>
+        </div>
+        <div className="Floor Area">
+          <h3>Floor Area</h3>
+        </div>
+        <div className="Remaining Lease">
+          <h3>Remaining Lease</h3>
+        </div>
+        <div className="Resale Price">
+          <h3>Resale Price</h3>
+        </div>
+      </div>
+
       {messages.map((message, val) => (
-        <tr key={val}>
-          <td>{message.val.block}</td>
-          <td>{message.val.streetName}</td>
-          <td>{message.val.floorLevel}</td>
-          <td>{message.val.floorArea}</td>
-          <td>{message.val.remainingLease}</td>
-          <td>{message.val.resalePrice}</td>
-        </tr>
+        <div className="Flex-Row">
+          <div>{message.val.block}</div>
+          <div>{message.val.streetName}</div>
+          <div>{message.val.floorLevel}</div>
+          <div>{message.val.floorArea}</div>
+          <div> {message.val.remainingLease}</div>
+          <div>{message.val.resalePrice}</div>
+        </div>
       ))}
-    </tbody>
+    </div>
   );
 };
+
+// <tbody>
+//   <tr>
+//     <th>Block</th>
+//     <th>Street Name</th>
+//     <th>Floor Level</th>
+//     <th>Floor Area</th>
+//     <th>Remaining Lease</th>
+//     <th>Resale Price</th>
+//   </tr>
+//   {messages.map((message, val) => (
+//     <tr key={val}>
+//       <td>{message.val.block}</td>
+//       <td>{message.val.streetName}</td>
+//       <td>{message.val.floorLevel}</td>
+//       <td>{message.val.floorArea}</td>
+//       <td>{message.val.remainingLease}</td>
+//       <td>{message.val.resalePrice}</td>
+//     </tr>
+//   ))}
+// </tbody>
 
 // table format using div
 //   return (
