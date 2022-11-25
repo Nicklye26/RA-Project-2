@@ -112,12 +112,20 @@ const Composer = ({ loggedInUser }) => {
         />
         <label className="labelClass"> Floor Level: </label>
         <div onChange={handleTextInputChange}>
-          <input type="radio" value="1 to 4" name="floorLevel" defaultChecked />
-          1 to 4
-          <input type="radio" value="5 to 7" name="floorLevel" />5 to 7
-          <input type="radio" value="8 to 11" name="floorLevel" />8 to 11
-          <input type="radio" value="12 and above" name="floorLevel" />
-          12 and above
+          <select name="selectlist" id="selectlist">
+            <option value="option" name="floorLevel">
+              1 to 4
+            </option>
+            <option value="option" name="floorLevel">
+              5 to 7
+            </option>
+            <option value="option" name="floorLevel">
+              8 to 11
+            </option>
+            <option value="option" name="floorLevel">
+              12 and above
+            </option>
+          </select>
         </div>
         <label className="labelClass">Floor Area: </label>
         <input
