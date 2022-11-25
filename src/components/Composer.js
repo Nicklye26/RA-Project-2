@@ -41,7 +41,7 @@ const Composer = ({ loggedInUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Data validation for the textboxes
-    //console.log(state.floorLevel);
+    // console.log(state.floorLevel);
     if (!state.block) return;
     if (!state.streetName) return;
     if (state.floorArea === 0 || state.resalePrice === 0) return;
