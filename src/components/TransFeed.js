@@ -4,7 +4,7 @@ import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "../firebase";
 import "./App.css";
 import "../components/Transfeed.css";
-import AuthForm from "./AuthForm";
+// import AuthForm from "./AuthForm";
 
 const MESSAGE_FOLDER_NAME = "messages";
 

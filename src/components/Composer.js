@@ -51,6 +51,7 @@ const Composer = ({ loggedInUser }) => {
       return alert("Year Lease Start can only be from 1980 to 2017!");
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
+    if (!fileInputFile) return alert("Please upload an image");
 
     // Store images in an images folder in Firebase Storage
     const fileRef = storageRef(
