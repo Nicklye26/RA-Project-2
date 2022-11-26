@@ -15,9 +15,9 @@ const defaultState = {
   block: "",
   streetName: "",
   floorLevel: "1 to 4",
-  floorArea: 0,
-  yearLeaseStart: 1990,
-  resalePrice: 0,
+  floorArea: "",
+  yearLeaseStart: "",
+  resalePrice: "",
 };
 
 const Composer = ({ loggedInUser }) => {
@@ -41,7 +41,7 @@ const Composer = ({ loggedInUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Data validation for the textboxes
-    //console.log(state.floorLevel);
+    // console.log(state.floorLevel);
     if (!state.block) return;
     if (!state.streetName) return;
     if (state.floorArea === 0 || state.resalePrice === 0) return;
@@ -51,6 +51,7 @@ const Composer = ({ loggedInUser }) => {
       return alert("Year Lease Start can only be from 1980 to 2017!");
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
+    if (!fileInputFile) return alert("Please upload an image");
 
     // Store images in an images folder in Firebase Storage
     const fileRef = storageRef(
@@ -85,73 +86,87 @@ const Composer = ({ loggedInUser }) => {
   };
 
   return (
-    <form>
-      <p>Signed in as: {loggedInUser ? loggedInUser.email : null}</p>
-      <input
-        type="file"
-        value={fileInputValue}
-        onChange={handleFileInputChange}
-      />
-      <div className="inputBoxes">
-        <label className="labelClass">Block No: </label>
-        <input
-          className="boxClass"
-          name="block"
-          type="text"
-          maxLength="4"
-          value={state.block}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass">Street Name: </label>
-        <input
-          className="boxClass"
-          name="streetName"
-          type="text"
-          value={state.streetName}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass"> Floor Level: </label>
-        <div onChange={handleTextInputChange}>
-          <input type="radio" value="1 to 4" name="floorLevel" defaultChecked />
-          1 to 4
-          <input type="radio" value="5 to 7" name="floorLevel" />5 to 7
-          <input type="radio" value="8 to 11" name="floorLevel" />8 to 11
-          <input type="radio" value="12 and above" name="floorLevel" />
-          12 and above
+    <>
+      <p>{loggedInUser ? loggedInUser.email : null}</p>
+      <form>
+        <div className="inputBoxes">
+          <label className="labelClass">Block No: </label>
+          <input
+            className="boxClass"
+            name="block"
+            type="text"
+            maxLength="4"
+            value={state.block}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass">Street Name: </label>
+          <input
+            className="boxClass"
+            name="streetName"
+            type="text"
+            value={state.streetName}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass"> Floor Level: </label>
+          <div onChange={handleTextInputChange}>
+            <select name="selectlist" id="selectlist">
+              <option value="option" name="floorLevel">
+                1 to 4
+              </option>
+              <option value="option" name="floorLevel">
+                5 to 7
+              </option>
+              <option value="option" name="floorLevel">
+                8 to 11
+              </option>
+              <option value="option" name="floorLevel">
+                12 and above
+              </option>
+            </select>
+          </div>
+          <label className="labelClass">Floor Area (sqm): </label>
+          <input
+            className="boxClass"
+            name="floorArea"
+            type="number"
+            min="0"
+            max="300"
+            value={state.floorArea}
+            onChange={handleTextInputChange}
+          />
+          <label className="labelClass">Year Lease Start: </label>
+          <input
+            className="boxClass"
+            name="yearLeaseStart"
+            type="number"
+            min="1980"
+            max="2017"
+            value={state.yearLeaseStart}
+            onChange={handleTextInputChange}
+            placeholder="example: 1990"
+          />
+          <label className="labelClass">Resale Price (SGD): </label>
+          <input
+            className="boxClass"
+            name="resalePrice"
+            type="number"
+            min="0"
+            max="2000000"
+            value={state.resalePrice}
+            onChange={handleTextInputChange}
+          />
+          <input
+            type="file"
+            value={fileInputValue}
+            multiple
+            onChange={handleFileInputChange}
+          />
         </div>
-        <label className="labelClass">Floor Area: </label>
-        <input
-          className="boxClass"
-          name="floorArea"
-          type="number"
-          min="0"
-          max="300"
-          value={state.floorArea}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass">Year Lease Start: </label>
-        <input
-          className="boxClass"
-          name="yearLeaseStart"
-          type="number"
-          min="1980"
-          max="2017"
-          value={state.yearLeaseStart}
-          onChange={handleTextInputChange}
-        />
-        <label className="labelClass">Resale Price: </label>
-        <input
-          className="boxClass"
-          name="resalePrice"
-          type="number"
-          min="0"
-          max="2000000"
-          value={state.resalePrice}
-          onChange={handleTextInputChange}
-        />
-      </div>
-      <button onClick={handleSubmit}>Send</button>
-    </form>
+        <button>Edit</button>
+        <button onClick={handleSubmit}>Create</button>
+        <button>Delete</button>
+      </form>
+    </>
   );
 };
 
