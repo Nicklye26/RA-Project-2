@@ -66,7 +66,7 @@ const Composer = ({ loggedInUser }) => {
         set(newMessageRef, {
           imageLink: downloadUrl,
           createdAt: new Date().toLocaleDateString("en-GB"),
-          authorEmail: this.props.loggedInUser.email,
+          authorEmail: loggedInUser.email,
           block: state.block,
           streetName: state.streetName,
           floorLevel: state.floorLevel,
