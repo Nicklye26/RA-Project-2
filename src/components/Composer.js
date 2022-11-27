@@ -66,6 +66,7 @@ const Composer = ({ loggedInUser }) => {
         const newMessageRef = push(messageListRef);
         set(newMessageRef, {
           imageLink: downloadUrl,
+          imageName: fileInputFile.name,
           createdAt: new Date().toLocaleDateString("en-GB"),
           authorEmail: loggedInUser.email,
           block: state.block,
@@ -109,17 +110,17 @@ const Composer = ({ loggedInUser }) => {
           />
           <label className="labelClass"> Floor Level: </label>
           <div onChange={handleTextInputChange}>
-            <select name="selectlist" id="selectlist">
-              <option value="option" name="floorLevel">
+            <select name="floorLevel" id="selectlist">
+              <option value="1 to 4" name="floorLevel">
                 1 to 4
               </option>
-              <option value="option" name="floorLevel">
+              <option value="5 to 7" name="floorLevel">
                 5 to 7
               </option>
-              <option value="option" name="floorLevel">
+              <option value="8 to 11" name="floorLevel">
                 8 to 11
               </option>
-              <option value="option" name="floorLevel">
+              <option value="12 and above" name="floorLevel">
                 12 and above
               </option>
             </select>
@@ -162,9 +163,7 @@ const Composer = ({ loggedInUser }) => {
             onChange={handleFileInputChange}
           />
         </div>
-        <button>Edit</button>
         <button onClick={handleSubmit}>Create</button>
-        <button>Delete</button>
       </form>
     </>
   );
