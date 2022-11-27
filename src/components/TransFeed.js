@@ -29,41 +29,33 @@ const TransFeed = () => {
     // onChildAdded will return data for every child at the reference and every subsequent new child
 
     onChildAdded(messageRef, (data) => {
-      console.log("ADDED");
-      console.log(messageRef);
-      // console.log(data);
       setMessages((prevState) => [
         ...prevState,
         { key: data.key, val: data.val() },
       ]);
     });
     onChildRemoved(messageRef, (data) => {
-      console.log("REMOVED");
-      console.log(data);
-      console.log();
       setMessages((prevState) =>
-        prevState.filter((msg) => msg.key !== data.key)
+        prevState.filter((message) => message.key !== data.key)
       );
     });
   }, []);
 
   const removeData = (message) => {
-    console.log(message);
-    console.log(message.val.imageName);
-
     const db = getDatabase();
     const sb = getStorage();
     remove(databaseRef(db, `messages/${message.key}`))
       .then(() => {
-        console.log("DELTEDDDDD");
+        alert("your post is removed!");
       })
       .catch((error) => {
         console.log(error);
       });
+
     const imageToDelete = storageRef(sb, `images/${message.val.imageName}`);
     deleteObject(imageToDelete)
       .then(() => {
-        console.log("delete image");
+        // success
       })
       .catch((error) => {
         console.log(error);
