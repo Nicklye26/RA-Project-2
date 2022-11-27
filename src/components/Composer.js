@@ -66,6 +66,7 @@ const Composer = ({ loggedInUser }) => {
         const newMessageRef = push(messageListRef);
         set(newMessageRef, {
           imageLink: downloadUrl,
+          imageName: fileInputFile.name,
           createdAt: new Date().toLocaleDateString("en-GB"),
           authorEmail: loggedInUser.email,
           block: state.block,
@@ -162,9 +163,7 @@ const Composer = ({ loggedInUser }) => {
             onChange={handleFileInputChange}
           />
         </div>
-        <button>Edit</button>
         <button onClick={handleSubmit}>Create</button>
-        <button>Delete</button>
       </form>
     </>
   );
