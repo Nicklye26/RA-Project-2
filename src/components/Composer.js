@@ -1,29 +1,20 @@
 import React, { useState } from "react";
-import { push, ref as databaseRef, set } from "firebase/database";
+import { push, ref as databaseRef, set, update } from "firebase/database";
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
 import { database, storage } from "../firebase";
+import { defaultState } from "./App";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
 const IMAGES_FOLDER_NAME = "images";
 
-const defaultState = {
-  block: "",
-  streetName: "",
-  floorLevel: "1 to 4",
-  floorArea: "",
-  yearLeaseStart: "",
-  resalePrice: "",
-};
-
-const Composer = ({ loggedInUser }) => {
+const Composer = ({ loggedInUser, state, setState }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
-  const [state, setState] = useState(defaultState);
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,7 +32,6 @@ const Composer = ({ loggedInUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Data validation for the textboxes
-    // console.log(state.floorLevel);
     if (!state.block) return;
     if (!state.streetName) return;
     if (state.floorArea === 0 || state.resalePrice === 0) return;
@@ -51,9 +41,28 @@ const Composer = ({ loggedInUser }) => {
       return alert("Year Lease Start can only be from 1980 to 2017!");
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
-    if (!fileInputFile) return alert("Please upload an image");
+
+    let uid = state.key;
+    if (uid) {
+      const messageListRef = databaseRef(database, MESSAGE_KEY);
+      const updates = {};
+      updates[uid] = {
+        block: state.block,
+        streetName: state.streetName,
+        floorLevel: state.floorLevel,
+        floorArea: parseInt(state.floorArea),
+        resalePrice: parseInt(state.resalePrice),
+        yearLeaseStart: parseInt(state.yearLeaseStart),
+        remainingLease: 99 - (new Date().getFullYear() - state.yearLeaseStart),
+      };
+      // Reset input fields after submit
+      setState(defaultState);
+
+      return update(messageListRef, updates);
+    }
 
     // Store images in an images folder in Firebase Storage
+    if (!fileInputFile) return alert("Please upload an image");
     const fileRef = storageRef(
       storage,
       `${IMAGES_FOLDER_NAME}/${fileInputFile.name}`
@@ -109,22 +118,24 @@ const Composer = ({ loggedInUser }) => {
             onChange={handleTextInputChange}
           />
           <label className="labelClass"> Floor Level: </label>
-          <div onChange={handleTextInputChange}>
-            <select name="floorLevel" id="selectlist">
-              <option value="1 to 4" name="floorLevel">
-                1 to 4
-              </option>
-              <option value="5 to 7" name="floorLevel">
-                5 to 7
-              </option>
-              <option value="8 to 11" name="floorLevel">
-                8 to 11
-              </option>
-              <option value="12 and above" name="floorLevel">
-                12 and above
-              </option>
-            </select>
-          </div>
+          <select
+            name="floorLevel"
+            value={state.floorLevel}
+            onChange={handleTextInputChange}
+          >
+            <option value="1 to 4" name="floorLevel">
+              1 to 4
+            </option>
+            <option value="5 to 7" name="floorLevel">
+              5 to 7
+            </option>
+            <option value="8 to 11" name="floorLevel">
+              8 to 11
+            </option>
+            <option value="12 and above" name="floorLevel">
+              12 and above
+            </option>
+          </select>
           <label className="labelClass">Floor Area (sqm): </label>
           <input
             className="boxClass"

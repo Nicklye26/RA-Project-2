@@ -7,9 +7,19 @@ import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
+export const defaultState = {
+  block: "",
+  streetName: "",
+  floorLevel: "1 to 4",
+  floorArea: "",
+  yearLeaseStart: "",
+  resalePrice: "",
+};
+
 function App() {
   // Code to use later for checking whether user is logged in
   const [loggedInUser, setLoggedInUser] = useState();
+  const [state, setState] = useState(defaultState);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -31,12 +41,14 @@ function App() {
     </div>
   );
   const authForm = <AuthForm />;
-  const composer = <Composer loggedInUser={loggedInUser} />;
+  const composer = (
+    <Composer loggedInUser={loggedInUser} state={state} setState={setState} />
+  );
   const composerAndTransFeed = (
     <div>
       {loggedInUser ? composer : loginButton}
       <br />
-      <TransFeed />
+      <TransFeed state={state} setState={setState} />
     </div>
   );
 
