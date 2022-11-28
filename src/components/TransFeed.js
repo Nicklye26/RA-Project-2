@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import Card from "react-bootstrap/Card";
 import {
   onChildAdded,
+  onChildChanged,
   onChildRemoved,
   ref as databaseRef,
   getDatabase,
@@ -21,7 +22,7 @@ const MESSAGE_FOLDER_NAME = "messages";
 //   <Link to="authForm"></Link>
 // }
 
-const TransFeed = () => {
+const TransFeed = ({ state, setState }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -34,12 +35,26 @@ const TransFeed = () => {
         { key: data.key, val: data.val() },
       ]);
     });
+    onChildChanged(messageRef, (data) => {
+      setMessages((prevState) =>
+        prevState.map((item) =>
+          item.key === data.key ? { key: data.key, val: data.val() } : item
+        )
+      );
+    });
+
     onChildRemoved(messageRef, (data) => {
       setMessages((prevState) =>
         prevState.filter((message) => message.key !== data.key)
       );
     });
   }, []);
+
+  const updateData = (record) => {
+    state = record.val;
+    setState(state);
+    state.key = record.key;
+  };
 
   const removeData = (message) => {
     const db = getDatabase();
@@ -93,9 +108,9 @@ const TransFeed = () => {
           <div className="Floor Area">{message.val.floorArea}</div>
           <div className="Remaining Lease">{message.val.remainingLease}</div>
           <div className="Resale Price">{message.val.resalePrice}</div>
-          {/* <button onClick={updataData(message)}>Edit</button> */}
+          <button onClick={() => updateData(message)}> Edit</button>
           {/* <button onClick={removeData(message)}>Delete</button> */}
-          <button>edit</button>
+          {/* <button>edit</button> */}
           <button onClick={() => removeData(message)}>delete</button>
         </div>
       ))}
