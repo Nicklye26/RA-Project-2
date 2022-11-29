@@ -4,14 +4,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = (props) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isNewUser, setIsNewUser] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleEmailInputChange = (e) => {
     setEmailInput(e.target.value);
@@ -26,7 +26,7 @@ const AuthForm = (props) => {
     setPasswordInput("");
     setIsNewUser(true);
     setErrorMessage("");
-    // navigate("/");
+    navigate("/");
   };
 
   const setErrorState = (error) => {
