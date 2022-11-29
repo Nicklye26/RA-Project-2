@@ -40,7 +40,6 @@ function App() {
       <Link to="authform">Create Account Or Sign In</Link> <br />{" "}
     </div>
   );
-  const authForm = <AuthForm />;
   const composer = (
     <Composer loggedInUser={loggedInUser} state={state} setState={setState} />
   );
@@ -66,7 +65,7 @@ function App() {
           </div>
           <Routes>
             <Route path="/" element={composerAndTransFeed} />
-            <Route path="authform" element={authForm} />
+            <Route path="authform" element={<AuthForm />} />
           </Routes>
         </header>
       </div>

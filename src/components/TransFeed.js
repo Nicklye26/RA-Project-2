@@ -5,11 +5,10 @@ import {
   onChildChanged,
   onChildRemoved,
   ref as databaseRef,
-  getDatabase,
   remove,
 } from "firebase/database";
-import { ref as storageRef, getStorage, deleteObject } from "firebase/storage";
-import { database } from "../firebase";
+import { ref as storageRef, deleteObject } from "firebase/storage";
+import { database, storage } from "../firebase";
 import "./App.css";
 import "../components/Transfeed.css";
 // import AuthForm from "./AuthForm";
@@ -57,9 +56,7 @@ const TransFeed = ({ state, setState }) => {
   };
 
   const removeData = (message) => {
-    const db = getDatabase();
-    const sb = getStorage();
-    remove(databaseRef(db, `messages/${message.key}`))
+    remove(databaseRef(database, `messages/${message.key}`))
       .then(() => {
         alert("your post is removed!");
       })
@@ -67,7 +64,10 @@ const TransFeed = ({ state, setState }) => {
         console.log(error);
       });
 
-    const imageToDelete = storageRef(sb, `images/${message.val.imageName}`);
+    const imageToDelete = storageRef(
+      storage,
+      `images/${message.val.imageName}`
+    );
     deleteObject(imageToDelete)
       .then(() => {
         // success
@@ -79,39 +79,46 @@ const TransFeed = ({ state, setState }) => {
 
   return (
     <div className="Transfeed-Table">
-      <div className="Flex-Row">
+      <div className="Flex-Row-Titles">
         <div className="Block-Row">
           <h3>Block</h3>
         </div>
         <div className="Street-Name">
           <h3>Street Name</h3>
         </div>
-        <div className="Floor Level">
+        <div className="Floor-Level">
           <h3>Floor Level</h3>
         </div>
-        <div className="Floor Area">
+        <div className="Floor-Area">
           <h3>Floor Area</h3>
         </div>
-        <div className="Remaining Lease">
+        <div className="Remaining-Lease">
           <h3>Remaining Lease</h3>
         </div>
-        <div className="Resale Price">
+        <div className="Resale-Price">
           <h3>Resale Price</h3>
         </div>
+        <div className="box"></div>
+        <div className="box"></div>
+        <div className="box"></div>
       </div>
 
       {messages.map((message, val) => (
         <div className="Flex-Row" key={val}>
           <div className="Block-Row">{message.val.block}</div>
           <div className="Street-Name">{message.val.streetName}</div>
-          <div className="Floor Level">{message.val.floorLevel}</div>
-          <div className="Floor Area">{message.val.floorArea}</div>
-          <div className="Remaining Lease">{message.val.remainingLease}</div>
-          <div className="Resale Price">{message.val.resalePrice}</div>
-          <button onClick={() => updateData(message)}> Edit</button>
-          {/* <button onClick={removeData(message)}>Delete</button> */}
-          {/* <button>edit</button> */}
-          <button onClick={() => removeData(message)}>delete</button>
+          <div className="Floor-Level">{message.val.floorLevel}</div>
+          <div className="Floor-Area">{message.val.floorArea}</div>
+          <div className="Remaining-Lease">{message.val.remainingLease}</div>
+          <div className="Resale-Price">{message.val.resalePrice}</div>
+          <button className="box" onClick={() => updateData(message)}>
+            {" "}
+            Edit
+          </button>
+          <button className="box" onClick={() => removeData(message)}>
+            delete
+          </button>
+          <button className="box">+</button>
         </div>
       ))}
     </div>
