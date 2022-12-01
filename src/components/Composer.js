@@ -12,7 +12,7 @@ import { defaultState } from "./App";
 const MESSAGE_KEY = "messages";
 const IMAGES_FOLDER_NAME = "images";
 
-const Composer = ({ loggedInUser, state, setState }) => {
+const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
 
@@ -57,6 +57,7 @@ const Composer = ({ loggedInUser, state, setState }) => {
       };
       // Reset input fields after submit
       setState(defaultState);
+      setAddMode(!addMode);
 
       return update(messageListRef, updates);
     }
@@ -172,9 +173,10 @@ const Composer = ({ loggedInUser, state, setState }) => {
             value={fileInputValue}
             multiple
             onChange={handleFileInputChange}
+            disabled={!addMode}
           />
         </div>
-        <button onClick={handleSubmit}>Create</button>
+        <button onClick={handleSubmit}>{addMode ? "Create" : "Save"}</button>
       </form>
     </>
   );
