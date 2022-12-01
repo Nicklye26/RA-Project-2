@@ -1,5 +1,6 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
+import ShowImage from "./ShowImage.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
@@ -20,6 +21,7 @@ function App() {
   // Code to use later for checking whether user is logged in
   const [loggedInUser, setLoggedInUser] = useState();
   const [state, setState] = useState(defaultState);
+  const [addMode, setAddMode] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -41,13 +43,24 @@ function App() {
     </div>
   );
   const composer = (
-    <Composer loggedInUser={loggedInUser} state={state} setState={setState} />
+    <Composer
+      loggedInUser={loggedInUser}
+      state={state}
+      setState={setState}
+      addMode={addMode}
+      setAddMode={setAddMode}
+    />
   );
   const composerAndTransFeed = (
     <div>
       {loggedInUser ? composer : loginButton}
       <br />
-      <TransFeed state={state} setState={setState} />
+      <TransFeed
+        state={state}
+        setState={setState}
+        addMode={addMode}
+        setAddMode={setAddMode}
+      />
     </div>
   );
 
