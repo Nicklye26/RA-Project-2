@@ -7,6 +7,7 @@ import Composer from "./Composer.js";
 import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 export const defaultState = {
   block: "",
@@ -66,23 +67,32 @@ function App() {
   );
 
   return (
-    <>
-      <div className="App">
-        <div className="Navbar">
+    <div className="App">
+      <Navbar bg="dark" variant="dark">
+        <Nav>
+          {" "}
           <img
             src={require("../assets/Sales-of-Flats-Logo.png")}
             alt="Website-Logo"
           />
-          <p>{<loggedInUser />}</p>
-        </div>
-        <header className="App-header">
-          <Routes>
-            <Route path="/" element={composerAndTransFeed} />
-            <Route path="authform" element={<AuthForm />} />
-          </Routes>
-        </header>
-      </div>
-    </>
+          <p>goodbye world</p>
+          {/* <p>{loggedInUser}</p> */}
+        </Nav>
+        <Nav>
+          <NavDropdown title="username">
+            <NavDropdown.Item onClick={() => setLoggedInUser(null)}>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+      </Navbar>
+      <header className="App-header">
+        <Routes>
+          <Route path="/" element={composerAndTransFeed} />
+          <Route path="authform" element={<AuthForm />} />
+        </Routes>
+      </header>
+    </div>
   );
 }
 

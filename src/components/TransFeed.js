@@ -72,7 +72,7 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
   const removeData = (message) => {
     remove(databaseRef(database, `messages/${message.key}`))
       .then(() => {
-        alert("your post is removed!");
+        alert("Your post is removed!");
       })
       .catch((error) => {
         console.log(error);
@@ -111,7 +111,7 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
             <h3>Remaining Lease (years)</h3>
           </div>
           <div className="Resale-Price">
-            <h3>Resale Price</h3>
+            <h3>Resale Price (SGD)</h3>
           </div>
           <div className="box"></div>
           <div className="box"></div>
