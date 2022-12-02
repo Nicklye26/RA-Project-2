@@ -6,7 +6,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
 import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 export const defaultState = {
@@ -40,7 +40,6 @@ function App() {
 
   const loginButton = (
     <div>
-      {" "}
       <button>
         <Link to="authform">Create Account Or Sign In</Link>
       </button>
@@ -69,6 +68,24 @@ function App() {
     </div>
   );
 
+  const logOutUser = () => {
+    console.log("hello hello");
+    console.log(loggedInUser.email);
+    const authentication = getAuth();
+    console.log(authentication);
+    signOut(authentication)
+      .then(() => {
+        setLoggedInUser(null);
+        console.log("successful log out", loggedInUser);
+        console.log(loggedInUser);
+        //sign out success
+      })
+      .catch((error) => {
+        console.log(error);
+        // error
+      });
+  };
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -81,7 +98,7 @@ function App() {
         {loggedInUser && loggedInUser.email ? (
           <Nav>
             <NavDropdown title={loggedInUser && loggedInUser.email}>
-              <NavDropdown.Item onClick={() => setLoggedInUser(null)}>
+              <NavDropdown.Item onClick={() => logOutUser()}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
