@@ -26,6 +26,7 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log("onAuthStateChanged", user);
       if (user) {
         // User is signed in, saved logged-in user to state
         setLoggedInUser(user);
@@ -40,13 +41,15 @@ function App() {
   const loginButton = (
     <div>
       {" "}
-      <Link to="authform">Create Account Or Sign In</Link> <br />{" "}
+      <button>
+        <Link to="authform">Create Account Or Sign In</Link>
+      </button>
+      <br />
     </div>
   );
 
   const composer = (
     <Composer
-      loggedInUser={loggedInUser}
       state={state}
       setState={setState}
       addMode={addMode}
@@ -70,21 +73,20 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Nav>
-          {" "}
           <img
             src={require("../assets/Sales-of-Flats-Logo.png")}
             alt="Website-Logo"
           />
-          <p>goodbye world</p>
-          {/* <p>{loggedInUser}</p> */}
         </Nav>
-        <Nav>
-          <NavDropdown title="username">
-            <NavDropdown.Item onClick={() => setLoggedInUser(null)}>
-              Logout
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
+        {loggedInUser && loggedInUser.email ? (
+          <Nav>
+            <NavDropdown title={loggedInUser && loggedInUser.email}>
+              <NavDropdown.Item onClick={() => setLoggedInUser(null)}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        ) : null}
       </Navbar>
       <header className="App-header">
         <Routes>
