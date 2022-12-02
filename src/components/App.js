@@ -1,6 +1,6 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
-import ShowImage from "./ShowImage.js";
+// import ShowImage from "./ShowImage.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
@@ -42,6 +42,7 @@ function App() {
       <Link to="authform">Create Account Or Sign In</Link> <br />{" "}
     </div>
   );
+
   const composer = (
     <Composer
       loggedInUser={loggedInUser}
@@ -67,15 +68,14 @@ function App() {
   return (
     <>
       <div className="App">
+        <div className="Navbar">
+          <img
+            src={require("../assets/Sales-of-Flats-Logo.png")}
+            alt="Website-Logo"
+          />
+          <p>{<loggedInUser />}</p>
+        </div>
         <header className="App-header">
-          <div className="Navbar">
-            <div>
-              <img
-                src={require("../assets/Sales-of-Flats-Logo.png")}
-                alt="Website-Logo"
-              />
-            </div>
-          </div>
           <Routes>
             <Route path="/" element={composerAndTransFeed} />
             <Route path="authform" element={<AuthForm />} />

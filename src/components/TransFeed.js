@@ -105,10 +105,10 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
             <h3>Floor Level</h3>
           </div>
           <div className="Floor-Area">
-            <h3>Floor Area</h3>
+            <h3>Floor Area (sqm)</h3>
           </div>
           <div className="Remaining-Lease">
-            <h3>Remaining Lease</h3>
+            <h3>Remaining Lease (years)</h3>
           </div>
           <div className="Resale-Price">
             <h3>Resale Price</h3>
