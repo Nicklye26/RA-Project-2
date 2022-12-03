@@ -19,9 +19,9 @@ const ShowImage = ({ state, modal, closeModal, mapLink }) => {
         <Card.Img src={mapLink} alt="image" />
       </Modal.Body>
       <Modal.Footer className="modal-footer">
-        {/* <Button className="close" color="primary" onClick={closeModal}>
+        <Button className="close" color="primary" onClick={closeModal}>
           OK
-        </Button> */}
+        </Button>
       </Modal.Footer>
     </Modal>
   );

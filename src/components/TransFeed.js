@@ -24,7 +24,8 @@ const MESSAGE_FOLDER_NAME = "messages";
 //   <Link to="authForm"></Link>
 // }
 
-const TransFeed = ({ state, setState, addMode, setAddMode }) => {
+const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
+  console.log(loggedInUser);
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
   const [mapLink, setMapLink] = useState("");
@@ -138,8 +139,8 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
           <div className="Resale-Price">
             <h3>Resale Price (SGD)</h3>
           </div>
-          <div className="box"></div>
-          <div className="box"></div>
+          {loggedInUser ? <div className="box"></div> : null}
+          {loggedInUser ? <div className="box"></div> : null}
           <div className="box"></div>
         </div>
 
@@ -151,12 +152,16 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
             <div className="Floor-Area">{message.val.floorArea}</div>
             <div className="Remaining-Lease">{message.val.remainingLease}</div>
             <div className="Resale-Price">{message.val.resalePrice}</div>
-            <button className="box" onClick={() => updateData(message)}>
-              Edit
-            </button>
-            <button className="box" onClick={() => removeData(message)}>
-              delete
-            </button>
+            {loggedInUser ? (
+              <button className="box" onClick={() => updateData(message)}>
+                Edit
+              </button>
+            ) : null}
+            {loggedInUser ? (
+              <button className="box" onClick={() => removeData(message)}>
+                delete
+              </button>
+            ) : null}
             <button className="box" onClick={() => openModal(message)}>
               +
             </button>
