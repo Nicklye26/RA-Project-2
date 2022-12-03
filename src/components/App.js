@@ -1,12 +1,13 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
-import ShowImage from "./ShowImage.js";
+// import ShowImage from "./ShowImage.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
 import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 export const defaultState = {
   block: "",
@@ -25,6 +26,7 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log("onAuthStateChanged", user);
       if (user) {
         // User is signed in, saved logged-in user to state
         setLoggedInUser(user);
@@ -38,13 +40,15 @@ function App() {
 
   const loginButton = (
     <div>
-      {" "}
-      <Link to="authform">Create Account Or Sign In</Link> <br />{" "}
+      <button>
+        <Link to="authform">Create Account Or Sign In</Link>
+      </button>
+      <br />
     </div>
   );
+
   const composer = (
     <Composer
-      loggedInUser={loggedInUser}
       state={state}
       setState={setState}
       addMode={addMode}
@@ -64,25 +68,50 @@ function App() {
     </div>
   );
 
+  const logOutUser = () => {
+    console.log("hello hello");
+    console.log(loggedInUser.email);
+    const authentication = getAuth();
+    console.log(authentication);
+    signOut(authentication)
+      .then(() => {
+        setLoggedInUser(null);
+        console.log("successful log out", loggedInUser);
+        console.log(loggedInUser);
+        //sign out success
+      })
+      .catch((error) => {
+        console.log(error);
+        // error
+      });
+  };
+
   return (
-    <>
-      <div className="App">
-        <header className="App-header">
-          <div className="Navbar">
-            <div>
-              <img
-                src={require("../assets/Sales-of-Flats-Logo.png")}
-                alt="Website-Logo"
-              />
-            </div>
-          </div>
-          <Routes>
-            <Route path="/" element={composerAndTransFeed} />
-            <Route path="authform" element={<AuthForm />} />
-          </Routes>
-        </header>
-      </div>
-    </>
+    <div className="App">
+      <Navbar bg="dark" variant="dark">
+        <Nav>
+          <img
+            src={require("../assets/Sales-of-Flats-Logo.png")}
+            alt="Website-Logo"
+          />
+        </Nav>
+        {loggedInUser && loggedInUser.email ? (
+          <Nav>
+            <NavDropdown title={loggedInUser && loggedInUser.email}>
+              <NavDropdown.Item onClick={() => logOutUser()}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        ) : null}
+      </Navbar>
+      <header className="App-header">
+        <Routes>
+          <Route path="/" element={composerAndTransFeed} />
+          <Route path="authform" element={<AuthForm />} />
+        </Routes>
+      </header>
+    </div>
   );
 }
 
