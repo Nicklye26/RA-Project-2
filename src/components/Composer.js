@@ -47,6 +47,9 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
       const messageListRef = databaseRef(database, MESSAGE_KEY);
       const updates = {};
       updates[uid] = {
+        imageLink: state.imageLink,
+        createdAt: new Date().toLocaleDateString("en-GB"),
+        authorEmail: loggedInUser.email,
         block: state.block,
         streetName: state.streetName,
         floorLevel: state.floorLevel,
@@ -76,7 +79,7 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         const newMessageRef = push(messageListRef);
         set(newMessageRef, {
           imageLink: downloadUrl,
-          imageName: fileInputFile.name,
+          //imageName: fileInputFile.name,
           createdAt: new Date().toLocaleDateString("en-GB"),
           authorEmail: loggedInUser.email,
           block: state.block,

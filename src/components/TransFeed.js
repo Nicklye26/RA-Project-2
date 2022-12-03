@@ -25,43 +25,45 @@ const MESSAGE_FOLDER_NAME = "messages";
 // }
 
 const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
-  console.log(loggedInUser);
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
   const [mapLink, setMapLink] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const openModal = (record) => {
     state = record.val;
     setState(state);
     setModal(true);
-
-    if (!state.block || !state.streetName) return;
-    let address = state.block + " " + state.streetName;
-    axios
-      .get(
-        `https://developers.onemap.sg/commonapi/search?searchVal=${address}&returnGeom=Y&getAddrDetails=Y&pageNum=1`
-      )
-      .then((response) => {
-        const { data: locationData } = response;
-        console.log(locationData);
-        //console.log("Latitude: ", locationData.results[0].LATITUDE);
-        //console.log("Longitude: ", locationData.results[0].LONGITUDE);
-        setMapLink(
-          `https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=default&lat=${locationData.results[0].LATITUDE}&lng=${locationData.results[0].LONGITUDE}&zoom=15&width=128&height=128`
-        );
-        console.log(mapLink);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //if (!state.block || !state.streetName) return;
+    getOneMap(state.block + " " + state.streetName);
   };
 
   const closeModal = () => {
     setModal(false);
     setState(defaultState);
+    setMapLink("");
+    setErrorMessage("");
   };
 
-  const getAPI = () => {};
+  const getOneMap = (address) => {
+    axios
+      .get(
+        `https://developers.onemap.sg/commonapi/search?searchVal=${address}&returnGeom=Y&getAddrDetails=Y&pageNum=1`
+      )
+      .then((response) => {
+        const { data } = response;
+        const locationData = data.results[0];
+        let zoom = 17;
+        let width = 400;
+        let height = 512;
+        //console.log("Latitude: ", locationData.LATITUDE);
+        //console.log("Longitude: ", locationData.LONGITUDE);
+        setMapLink(
+          `https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=original&lat=${locationData.LATITUDE}&lng=${locationData.LONGITUDE}&zoom=${zoom}&width=${width}&height=${height}&points=[${locationData.LATITUDE},${locationData.LONGITUDE},"175,50,0","A"]`
+        );
+      })
+      .catch((error) => setErrorMessage(error.message));
+  };
 
   useEffect(() => {
     const messageRef = databaseRef(database, MESSAGE_FOLDER_NAME);
@@ -174,6 +176,7 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         modal={modal}
         closeModal={closeModal}
         mapLink={mapLink}
+        errorMessage={errorMessage}
       />
     </>
   );
