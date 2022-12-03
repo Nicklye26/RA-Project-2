@@ -14,6 +14,7 @@ import "./Transfeed.css";
 import ShowImage from "./ShowImage";
 // import AuthForm from "./AuthForm";
 import { defaultState } from "./App";
+import axios from "axios";
 
 const MESSAGE_FOLDER_NAME = "messages";
 
@@ -26,16 +27,40 @@ const MESSAGE_FOLDER_NAME = "messages";
 const TransFeed = ({ state, setState, addMode, setAddMode }) => {
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
+  const [mapLink, setMapLink] = useState("");
 
   const openModal = (record) => {
     state = record.val;
     setState(state);
     setModal(true);
+
+    if (!state.block || !state.streetName) return;
+    let address = state.block + " " + state.streetName;
+    axios
+      .get(
+        `https://developers.onemap.sg/commonapi/search?searchVal=${address}&returnGeom=Y&getAddrDetails=Y&pageNum=1`
+      )
+      .then((response) => {
+        const { data: locationData } = response;
+        console.log(locationData);
+        //console.log("Latitude: ", locationData.results[0].LATITUDE);
+        //console.log("Longitude: ", locationData.results[0].LONGITUDE);
+        setMapLink(
+          `https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=default&lat=${locationData.results[0].LATITUDE}&lng=${locationData.results[0].LONGITUDE}&zoom=15&width=128&height=128`
+        );
+        console.log(mapLink);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   const closeModal = () => {
     setModal(false);
     setState(defaultState);
   };
+
+  const getAPI = () => {};
 
   useEffect(() => {
     const messageRef = databaseRef(database, MESSAGE_FOLDER_NAME);
@@ -139,7 +164,12 @@ const TransFeed = ({ state, setState, addMode, setAddMode }) => {
         ))}
       </div>
 
-      <ShowImage state={state} modal={modal} closeModal={closeModal} />
+      <ShowImage
+        state={state}
+        modal={modal}
+        closeModal={closeModal}
+        mapLink={mapLink}
+      />
     </>
   );
 };

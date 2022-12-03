@@ -1,6 +1,5 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
-import ShowImage from "./ShowImage.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
