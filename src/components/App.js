@@ -49,6 +49,7 @@ function App() {
 
   const composer = (
     <Composer
+      loggedInUser={loggedInUser}
       state={state}
       setState={setState}
       addMode={addMode}
@@ -60,6 +61,7 @@ function App() {
       {loggedInUser ? composer : loginButton}
       <br />
       <TransFeed
+        loggedInUser={loggedInUser}
         state={state}
         setState={setState}
         addMode={addMode}
