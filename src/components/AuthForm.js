@@ -7,10 +7,12 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = (props) => {
+  // const [displayName, setDisplayName] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isNewUser, setIsNewUser] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleEmailInputChange = (e) => {
@@ -21,7 +23,12 @@ const AuthForm = (props) => {
     setPasswordInput(e.target.value);
   };
 
+  // const handleUserNameInputChange = (e) => {
+  //   setDisplayName(e.target.value);
+  // };
+
   const closeAuthForm = () => {
+    // setDisplayName("");
     setEmailInput("");
     setPasswordInput("");
     setIsNewUser(true);
@@ -57,6 +64,16 @@ const AuthForm = (props) => {
     <div>
       <h1>Sales of HDB Flats</h1>
       <p>{errorMessage ? `${errorMessage}` : null}</p>
+      {/* to work on username later */}
+      {/* <label>
+        <input
+          type="text"
+          name="username"
+          value={displayName}
+          onChange={handleUserNameInputChange}
+          placeholder="Username"
+        />
+      </label> */}
 
       <label>
         <input

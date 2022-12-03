@@ -12,15 +12,16 @@ const ShowImage = ({ state, modal, closeModal, mapLink }) => {
       </Modal.Header>
       <Modal.Body className="modal-body">
         <Card.Img className="storage-image" src={state.imageLink} alt="image" />
-        <Card.Text> {state.block}</Card.Text>
-        <Card.Text> {state.streetName} </Card.Text>
+        <Card.Text>
+          Blk {state.block}, {state.streetName}
+        </Card.Text>
         <Card.Text> {state.remainingLease} years left </Card.Text>
         <Card.Img src={mapLink} alt="image" />
       </Modal.Body>
       <Modal.Footer className="modal-footer">
-        <Button className="close" color="primary" onClick={closeModal}>
+        {/* <Button className="close" color="primary" onClick={closeModal}>
           OK
-        </Button>
+        </Button> */}
       </Modal.Footer>
     </Modal>
   );
