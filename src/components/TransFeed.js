@@ -11,7 +11,7 @@ import { ref as storageRef, deleteObject } from "firebase/storage";
 import { database, storage } from "../firebase";
 import "./App.css";
 import "./Transfeed.css";
-import ShowImage from "./ShowImage";
+import ModalPopUp from "./ModalPopUp";
 // import AuthForm from "./AuthForm";
 import { defaultState } from "./App";
 import axios from "axios";
@@ -171,7 +171,7 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         ))}
       </div>
 
-      <ShowImage
+      <ModalPopUp
         state={state}
         modal={modal}
         closeModal={closeModal}

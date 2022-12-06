@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Button, Modal } from "react-bootstrap";
-import "./Modal.css";
+import "./ModalPopUp.css";
 
-const ShowImage = ({ state, modal, closeModal, mapLink, errorMessage }) => {
+const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
   return (
     <Modal className="modal" show={modal} onHide={closeModal}>
       <Modal.Header className="modal-header">
@@ -28,4 +28,4 @@ const ShowImage = ({ state, modal, closeModal, mapLink, errorMessage }) => {
   );
 };
 
-export default ShowImage;
+export default ModalPopUp;
