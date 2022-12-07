@@ -34,21 +34,6 @@
   }
 }
 
-button {
-  background-color: #4caf50;
-  border: none;
-  color: lightyellow;
-  font-weight: bold;
-  padding: 7px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: calc(5px + 1.5vmin);
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
 .storage-image {
   width: 50vw;
   height: 30vh;
@@ -69,4 +54,18 @@ button {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+}
+
+.Navbar-Logo {
+  object-fit: cover;
+  width: 200px;
+}
+
+.Home-Create-Sign-In-Button {
+  background-color: none;
+}
+
+.Home-Create-Sign-In-Link {
+  color: white;
+  font-size: 1.6rem;
 }

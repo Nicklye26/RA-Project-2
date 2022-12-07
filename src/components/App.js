@@ -40,8 +40,10 @@ function App() {
 
   const loginButton = (
     <div>
-      <Button>
-        <Link to="authform">Create Account Or Sign In</Link>
+      <Button className="Home-Create-Sign-In-Button">
+        <Link to="authform" className="Home-Create-Sign-In-Link">
+          Create Account Or Sign In
+        </Link>
       </Button>
       <br />
     </div>
@@ -94,7 +96,8 @@ function App() {
         <Navbar className="Nav-Bar-Side" position="top" variant="dark">
           <Navbar.Brand>
             <img
-              src={require("../assets/Sales-of-Flats-Logo.png")}
+              src={require("../assets/Sales-of-Flats-Logo-500.png")}
+              className="Navbar-Logo"
               alt="Website-Logo"
             />
           </Navbar.Brand>

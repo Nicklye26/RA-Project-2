@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import "./AuthForm.css";
 
 const AuthForm = (props) => {
   // const [displayName, setDisplayName] = useState("");
@@ -62,11 +63,17 @@ const AuthForm = (props) => {
   };
 
   return (
-    <div>
-      <h1>Sales of HDB Flats</h1>
-      <p>{errorMessage ? `${errorMessage}` : null}</p>
-      {/* to work on username later */}
-      {/* <label>
+    <>
+      <div className="Auth-Form-Container">
+        <div className="Auth-Form-Wrapper">
+          <img
+            src={require("../assets/Sales-of-Flats-Logo-500.png")}
+            className="Auth-Form-Logo"
+            alt="AuthForm-Logo"
+          />
+          <p>{errorMessage ? `${errorMessage}` : null}</p>
+          {/* to work on username later */}
+          {/* <label>
         <input
           type="text"
           name="username"
@@ -76,35 +83,42 @@ const AuthForm = (props) => {
         />
       </label> */}
 
-      <label>
-        <input
-          type="email"
-          name="emailInput"
-          value={emailInput}
-          onChange={handleEmailInputChange}
-          placeholder="Email"
-        />
-      </label>
-      <br />
-      <label>
-        <input
-          type="password"
-          name="passwordInput"
-          value={passwordInput}
-          onChange={handlePasswordInputChange}
-          minLength={6}
-          placeholder="Password"
-        />
-      </label>
-      <br />
-      <Button onClick={handleSubmit}>{isNewUser ? "Sign Up" : "Log In"}</Button>
-      <br />
-      <Button variant="link" onClick={toggleNewOrReturningAuth}>
-        {isNewUser
-          ? "Have an account? Log In"
-          : "Don't have an account? Sign Up"}
-      </Button>
-    </div>
+          <label className="Auth-Form-Label">
+            <input
+              className="Auth-Form-Input"
+              type="email"
+              name="emailInput"
+              value={emailInput}
+              onChange={handleEmailInputChange}
+              placeholder="Email"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="Auth-Form-Input"
+              type="password"
+              name="passwordInput"
+              value={passwordInput}
+              onChange={handlePasswordInputChange}
+              minLength={6}
+              placeholder="Password"
+            />
+          </label>
+          <br />
+          <Button className="Sign-In-Log-In-Button" onClick={handleSubmit}>
+            {isNewUser ? "Sign Up" : "Log In"}
+          </Button>
+        </div>
+        <div className="Toggle-Option-Container">
+          <Button variant="link" onClick={toggleNewOrReturningAuth}>
+            {isNewUser
+              ? "Have an account? Log In"
+              : "Don't have an account? Sign Up"}
+          </Button>
+        </div>
+      </div>
+    </>
   );
 };
 
