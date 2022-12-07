@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Card from "react-bootstrap/Card";
 import {
   onChildAdded,
   onChildChanged,
@@ -15,6 +14,7 @@ import ModalPopUp from "./ModalPopUp";
 // import AuthForm from "./AuthForm";
 import { defaultState } from "./App";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 
 const MESSAGE_FOLDER_NAME = "messages";
 
@@ -121,63 +121,67 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
 
   return (
     <>
-      <div className="Transfeed-Table">
-        <div className="Flex-Row-Titles">
-          <div className="Block-Row">
-            <h3>Block</h3>
+      <div className="Transfeed-Section">
+        <div className="Transfeed-Table">
+          <div className="Flex-Row-Titles">
+            <div className="Block-Row">
+              <h3>Block</h3>
+            </div>
+            <div className="Street-Name">
+              <h3>Street Name</h3>
+            </div>
+            <div className="Floor-Level">
+              <h3>Floor Level</h3>
+            </div>
+            <div className="Floor-Area">
+              <h3>Floor Area (sqm)</h3>
+            </div>
+            <div className="Remaining-Lease">
+              <h3>Remaining Lease (years)</h3>
+            </div>
+            <div className="Resale-Price">
+              <h3>Resale Price (SGD)</h3>
+            </div>
+            {loggedInUser ? <div className="box"></div> : null}
+            {loggedInUser ? <div className="box"></div> : null}
+            <div className="box"></div>
           </div>
-          <div className="Street-Name">
-            <h3>Street Name</h3>
-          </div>
-          <div className="Floor-Level">
-            <h3>Floor Level</h3>
-          </div>
-          <div className="Floor-Area">
-            <h3>Floor Area (sqm)</h3>
-          </div>
-          <div className="Remaining-Lease">
-            <h3>Remaining Lease (years)</h3>
-          </div>
-          <div className="Resale-Price">
-            <h3>Resale Price (SGD)</h3>
-          </div>
-          {loggedInUser ? <div className="box"></div> : null}
-          {loggedInUser ? <div className="box"></div> : null}
-          <div className="box"></div>
+
+          {messages.map((message, val) => (
+            <div className="Flex-Row" key={val}>
+              <div className="Block-Row">{message.val.block}</div>
+              <div className="Street-Name">{message.val.streetName}</div>
+              <div className="Floor-Level">{message.val.floorLevel}</div>
+              <div className="Floor-Area">{message.val.floorArea}</div>
+              <div className="Remaining-Lease">
+                {message.val.remainingLease}
+              </div>
+              <div className="Resale-Price">{message.val.resalePrice}</div>
+              {loggedInUser ? (
+                <Button className="box" onClick={() => updateData(message)}>
+                  Edit
+                </Button>
+              ) : null}
+              {loggedInUser ? (
+                <Button className="box" onClick={() => removeData(message)}>
+                  delete
+                </Button>
+              ) : null}
+              <Button className="box" onClick={() => openModal(message)}>
+                +
+              </Button>
+            </div>
+          ))}
         </div>
 
-        {messages.map((message, val) => (
-          <div className="Flex-Row" key={val}>
-            <div className="Block-Row">{message.val.block}</div>
-            <div className="Street-Name">{message.val.streetName}</div>
-            <div className="Floor-Level">{message.val.floorLevel}</div>
-            <div className="Floor-Area">{message.val.floorArea}</div>
-            <div className="Remaining-Lease">{message.val.remainingLease}</div>
-            <div className="Resale-Price">{message.val.resalePrice}</div>
-            {loggedInUser ? (
-              <button className="box" onClick={() => updateData(message)}>
-                Edit
-              </button>
-            ) : null}
-            {loggedInUser ? (
-              <button className="box" onClick={() => removeData(message)}>
-                delete
-              </button>
-            ) : null}
-            <button className="box" onClick={() => openModal(message)}>
-              +
-            </button>
-          </div>
-        ))}
+        <ModalPopUp
+          state={state}
+          modal={modal}
+          closeModal={closeModal}
+          mapLink={mapLink}
+          errorMessage={errorMessage}
+        />
       </div>
-
-      <ModalPopUp
-        state={state}
-        modal={modal}
-        closeModal={closeModal}
-        mapLink={mapLink}
-        errorMessage={errorMessage}
-      />
     </>
   );
 };

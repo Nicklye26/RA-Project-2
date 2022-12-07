@@ -1,6 +1,5 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
-// import ShowImage from "./ShowImage.js";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Composer from "./Composer.js";
@@ -8,6 +7,7 @@ import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export const defaultState = {
   block: "",
@@ -40,9 +40,9 @@ function App() {
 
   const loginButton = (
     <div>
-      <button>
+      <Button>
         <Link to="authform">Create Account Or Sign In</Link>
-      </button>
+      </Button>
       <br />
     </div>
   );
@@ -89,14 +89,14 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" id="home">
       <Navbar bg="dark" variant="dark">
-        <Nav>
+        <Navbar.Brand>
           <img
             src={require("../assets/Sales-of-Flats-Logo.png")}
             alt="Website-Logo"
           />
-        </Nav>
+        </Navbar.Brand>
         {loggedInUser && loggedInUser.email ? (
           <Nav>
             <NavDropdown title={loggedInUser && loggedInUser.email}>

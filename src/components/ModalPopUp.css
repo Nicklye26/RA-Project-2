@@ -58,6 +58,10 @@
   color: white;
 }
 
+.storage-image {
+  object-fit: cover;
+}
+
 /* Add Animation */
 @-webkit-keyframes slideIn {
   from {

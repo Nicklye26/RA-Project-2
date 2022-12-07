@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const AuthForm = (props) => {
   // const [displayName, setDisplayName] = useState("");
@@ -96,13 +97,13 @@ const AuthForm = (props) => {
         />
       </label>
       <br />
-      <button onClick={handleSubmit}>{isNewUser ? "Sign Up" : "Log In"}</button>
+      <Button onClick={handleSubmit}>{isNewUser ? "Sign Up" : "Log In"}</Button>
       <br />
-      <button variant="link" onClick={toggleNewOrReturningAuth}>
+      <Button variant="link" onClick={toggleNewOrReturningAuth}>
         {isNewUser
           ? "Have an account? Log In"
           : "Don't have an account? Sign Up"}
-      </button>
+      </Button>
     </div>
   );
 };
