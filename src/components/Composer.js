@@ -103,12 +103,16 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
 
   return (
     <>
-      <div className="Transaction-Form">
-        <h1>Welcome, {loggedInUser ? loggedInUser.email : null}</h1>
-        <p>
+      <div>
+        <h1 className="Composer-Welcome">
+          Welcome, {loggedInUser ? loggedInUser.email : null}
+        </h1>
+        <p className="Composer-Paragraph">
           Creata a post on your recent sale or check out the transaction table
           below
         </p>
+      </div>
+      <div className="Transaction-Form">
         <form className="Input-Form">
           <div className="Input-Boxes">
             <label className="Label-Class">Block No: </label>

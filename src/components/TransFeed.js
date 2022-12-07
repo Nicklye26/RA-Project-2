@@ -168,7 +168,7 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
                 </Button>
               ) : null}
               <Button className="box" onClick={() => openModal(message)}>
-                +
+                More Info
               </Button>
             </div>
           ))}

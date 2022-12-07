@@ -1,5 +1,14 @@
-.Transaction-Form {
+.Composer-Welcome {
   margin-top: 10%;
+  font-size: 6rem;
+}
+
+.Composer-Paragraph {
+  font-size: 1.5rem;
+}
+
+.Transaction-Form {
+  margin-top: 5%;
 }
 
 .Input-Form {
@@ -13,7 +22,7 @@
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 40vw;
 }
 
 .Label-Class {
@@ -27,13 +36,14 @@
 .Input-Box {
   width: 100%;
   height: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 1.2rem;
   border: 1px solid #cccccc;
 }
 
 .Upload-Image-Box {
   height: 40px;
+  margin-top: 10px;
   margin-bottom: 20px;
   font-size: 1.2rem;
   display: flex;
