@@ -5,7 +5,7 @@ import "./ModalPopUp.css";
 
 const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
   return (
-    <Modal className="modal" show={modal} onHide={closeModal}>
+    <Modal className="modal" show={modal} onHide={closeModal} size="xl">
       <Modal.Header className="modal-header">
         Details of the Transaction
       </Modal.Header>
@@ -16,6 +16,8 @@ const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
             src={state.imageLink}
             alt="image"
           />
+          <Card.Text>Created by {state.authorEmail}</Card.Text>
+          <Card.Text>{state.authorEmail}</Card.Text>
           <Card.Text>
             Blk {state.block}, {state.streetName}
           </Card.Text>
