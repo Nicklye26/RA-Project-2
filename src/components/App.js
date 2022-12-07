@@ -90,24 +90,27 @@ function App() {
 
   return (
     <div className="App" id="home">
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>
-          <img
-            src={require("../assets/Sales-of-Flats-Logo.png")}
-            alt="Website-Logo"
-          />
-        </Navbar.Brand>
-        {loggedInUser && loggedInUser.email ? (
-          <Nav>
-            <NavDropdown title={loggedInUser && loggedInUser.email}>
-              <NavDropdown.Item onClick={() => logOutUser()}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        ) : null}
-      </Navbar>
-      <header className="App-header">
+      <div className="Nav-Bar">
+        <Navbar className="Nav-Bar-Side" position="top" variant="dark">
+          <Navbar.Brand>
+            <img
+              src={require("../assets/Sales-of-Flats-Logo.png")}
+              alt="Website-Logo"
+            />
+          </Navbar.Brand>
+          {loggedInUser && loggedInUser.email ? (
+            <Nav>
+              <NavDropdown title={loggedInUser && loggedInUser.email}>
+                <NavDropdown.Item onClick={() => logOutUser()}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          ) : null}
+        </Navbar>
+      </div>
+
+      <header className="Right-Column">
         <Routes>
           <Route path="/" element={composerAndTransFeed} />
           <Route path="authform" element={<AuthForm />} />
