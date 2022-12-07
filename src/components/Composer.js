@@ -7,6 +7,8 @@ import {
 } from "firebase/storage";
 import { database, storage } from "../firebase";
 import { defaultState } from "./App";
+import { Button } from "react-bootstrap";
+import "./Composer.css";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
@@ -101,86 +103,100 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
 
   return (
     <>
-      <p>{loggedInUser ? loggedInUser.email : null}</p>
-      <form>
-        <div className="inputBoxes">
-          <label className="labelClass">Block No: </label>
-          <input
-            className="boxClass"
-            name="block"
-            type="text"
-            maxLength="4"
-            value={state.block}
-            onChange={handleTextInputChange}
-          />
-          <label className="labelClass">Street Name: </label>
-          <input
-            className="boxClass"
-            name="streetName"
-            type="text"
-            value={state.streetName}
-            onChange={handleTextInputChange}
-          />
-          <label className="labelClass"> Floor Level: </label>
-          <select
-            name="floorLevel"
-            value={state.floorLevel}
-            onChange={handleTextInputChange}
-          >
-            <option value="1 to 4" name="floorLevel">
-              1 to 4
-            </option>
-            <option value="5 to 7" name="floorLevel">
-              5 to 7
-            </option>
-            <option value="8 to 11" name="floorLevel">
-              8 to 11
-            </option>
-            <option value="12 and above" name="floorLevel">
-              12 and above
-            </option>
-          </select>
-          <label className="labelClass">Floor Area (sqm): </label>
-          <input
-            className="boxClass"
-            name="floorArea"
-            type="number"
-            min="0"
-            max="300"
-            value={state.floorArea}
-            onChange={handleTextInputChange}
-          />
-          <label className="labelClass">Year Lease Start: </label>
-          <input
-            className="boxClass"
-            name="yearLeaseStart"
-            type="number"
-            min="1980"
-            max="2017"
-            value={state.yearLeaseStart}
-            onChange={handleTextInputChange}
-            placeholder="example: 1990"
-          />
-          <label className="labelClass">Resale Price (SGD): </label>
-          <input
-            className="boxClass"
-            name="resalePrice"
-            type="number"
-            min="0"
-            max="2000000"
-            value={state.resalePrice}
-            onChange={handleTextInputChange}
-          />
-          <input
-            type="file"
-            value={fileInputValue}
-            multiple
-            onChange={handleFileInputChange}
-            disabled={!addMode}
-          />
-        </div>
-        <button onClick={handleSubmit}>{addMode ? "Create" : "Save"}</button>
-      </form>
+      <div>
+        <h1 className="Composer-Welcome">
+          Welcome, {loggedInUser ? loggedInUser.email : null}
+        </h1>
+        <p className="Composer-Paragraph">
+          Creata a post on your recent sale or check out the transaction table
+          below
+        </p>
+      </div>
+      <div className="Transaction-Form">
+        <form className="Input-Form">
+          <div className="Input-Boxes">
+            <label className="Label-Class">Block No: </label>
+            <input
+              className="Input-Box"
+              name="block"
+              type="text"
+              maxLength="4"
+              value={state.block}
+              onChange={handleTextInputChange}
+            />
+            <label className="Label-Class">Street Name: </label>
+            <input
+              className="Input-Box"
+              name="streetName"
+              type="text"
+              value={state.streetName}
+              onChange={handleTextInputChange}
+            />
+            <label className="Label-Class"> Floor Level: </label>
+            <select
+              className="Input-Box"
+              name="floorLevel"
+              value={state.floorLevel}
+              onChange={handleTextInputChange}
+            >
+              <option value="1 to 4" name="floorLevel">
+                1 to 4
+              </option>
+              <option value="5 to 7" name="floorLevel">
+                5 to 7
+              </option>
+              <option value="8 to 11" name="floorLevel">
+                8 to 11
+              </option>
+              <option value="12 and above" name="floorLevel">
+                12 and above
+              </option>
+            </select>
+            <label className="Label-Class">Floor Area (sqm): </label>
+            <input
+              className="Input-Box"
+              name="floorArea"
+              type="number"
+              min="0"
+              max="300"
+              value={state.floorArea}
+              onChange={handleTextInputChange}
+            />
+            <label className="Label-Class">Year Lease Start: </label>
+            <input
+              className="Input-Box"
+              name="yearLeaseStart"
+              type="number"
+              min="1980"
+              max="2017"
+              value={state.yearLeaseStart}
+              onChange={handleTextInputChange}
+              placeholder="example: 1990"
+            />
+            <label className="Label-Class">Resale Price (SGD): </label>
+            <input
+              className="Input-Box"
+              name="resalePrice"
+              type="number"
+              min="0"
+              max="2000000"
+              value={state.resalePrice}
+              onChange={handleTextInputChange}
+            />
+            <input
+              className="Upload-Image-Box"
+              type="file"
+              value={fileInputValue}
+              multiple
+              onChange={handleFileInputChange}
+              disabled={!addMode}
+            />
+          </div>
+          <Button className="Create-Save-Button" onClick={handleSubmit}>
+            {addMode ? "Create" : "Save"}
+          </Button>
+        </form>
+      </div>
     </>
   );
 };

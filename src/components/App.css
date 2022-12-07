@@ -1,15 +1,9 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  padding-top: 2%;
-  padding-bottom: 2%;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  padding-bottom: 5%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -18,12 +12,13 @@
   }
 }
 
-.App-header {
+.Right-Column {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: 15%;
 }
 
 .App-link {
@@ -39,46 +34,41 @@
   }
 }
 
-.inputBoxes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.labelClass {
-  text-align-last: left;
-  width: 300px;
-  margin: 4px 2px;
-}
-
-.boxClass {
-  border-radius: 6px;
-  margin: 4px 2px;
-}
-
-button {
-  background-color: #4caf50;
-  border: none;
-  color: lightyellow;
-  font-weight: bold;
-  padding: 7px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: calc(5px + 1.5vmin);
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
 .storage-image {
   width: 50vw;
   height: 30vh;
 }
 
-.Navbar {
+.Nav-Bar {
+  position: fixed;
+  height: 100vh;
+  width: 15%;
+  background-color: green;
+  padding-top: 10%;
+  box-shadow: rgb(0 0 0 / 50%) 1px 0px 8px 5px;
+}
+
+.Nav-Bar-Side {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  padding-left: 5%;
-  padding-right: 5%;
   align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.Navbar-Logo {
+  object-fit: cover;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.Home-Create-Sign-In-Button {
+  background-color: none;
+}
+
+.Home-Create-Sign-In-Link {
+  color: white;
+  font-size: 1.6rem;
 }
