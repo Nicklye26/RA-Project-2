@@ -15,10 +15,14 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  background-color: grey;
-  font-size: 1.5rem;
+  background-color: #c47335;
   padding-top: 15px;
   padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .Flex-Row {
@@ -27,10 +31,12 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.2 rem;
   padding-top: 1%;
   padding-bottom: 1%;
-  border-bottom: 1px solid white;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: 1px solid #d1a483;
 }
 
 .Flex-Column {
@@ -40,30 +46,40 @@
   align-items: center;
 }
 
+.Title-Text {
+  font-size: 1.3rem;
+}
+
 .Block-Row {
   width: 6%;
+  font-size: 1.2rem;
 }
 
 .Street-Name {
   width: 18%;
+  font-size: 1.2rem;
 }
 
 .Floor-Level {
   width: 8%;
+  font-size: 1.2rem;
 }
 
 .Floor-Area {
   width: 10%;
+  font-size: 1.2rem;
 }
 
 .Remaining-Lease {
   width: 15%;
+  font-size: 1.2rem;
 }
 
 .Resale-Price {
   width: 9.5%;
+  font-size: 1.2rem;
 }
 
 .box {
-  width: 7%;
+  width: 9%;
 }

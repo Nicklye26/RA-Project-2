@@ -10,18 +10,23 @@ const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
         Details of the Transaction
       </Modal.Header>
       <Modal.Body className="modal-body">
-        <div>
+        <div className="Modal-Left-Wrapper">
           <Card.Img
             className="storage-image"
             src={state.imageLink}
             alt="image"
           />
-          <Card.Text>Created by {state.authorEmail}</Card.Text>
-          <Card.Text>{state.authorEmail}</Card.Text>
-          <Card.Text>
+          <br />
+          <h1 className="Card-Text-Title">Address: </h1>
+          <h2 className="Card-Text-Text">
             Blk {state.block}, {state.streetName}
-          </Card.Text>
-          <Card.Text> {state.remainingLease} years left </Card.Text>
+          </h2>
+          <h1 className="Card-Text-Title">Remaining Lease Left: </h1>
+          <h2 className="Card-Text-Text">{state.remainingLease} years left</h2>
+          <h1 className="Card-Text-Title">Sold by: </h1>
+          <h2 className="Card-Text-Text">{state.authorEmail}</h2>
+          <h1 className="Card-Text-Title">Created on: </h1>
+          <h2 className="Card-Text-Text">{state.createdAt}</h2>
         </div>
         <div>
           <Card.Img src={mapLink} alt="image" />
