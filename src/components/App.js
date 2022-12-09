@@ -7,7 +7,6 @@ import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 
 export const defaultState = {
   block: "",
@@ -40,11 +39,9 @@ function App() {
 
   const loginButton = (
     <div>
-      <Button className="Home-Create-Sign-In-Button">
-        <Link to="authform" className="Home-Create-Sign-In-Link">
-          Create Account Or Sign In
-        </Link>
-      </Button>
+      <Link to="authform" className="Home-Create-Sign-In-Link">
+        Create Account Or Sign In
+      </Link>
       <br />
     </div>
   );

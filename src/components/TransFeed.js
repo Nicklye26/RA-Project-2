@@ -125,22 +125,22 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         <div className="Transfeed-Table">
           <div className="Flex-Row-Titles">
             <div className="Block-Row">
-              <h3>Block</h3>
+              <h1 className="Title-Text">Block</h1>
             </div>
             <div className="Street-Name">
-              <h3>Street Name</h3>
+              <h1 className="Title-Text">Street Name</h1>
             </div>
             <div className="Floor-Level">
-              <h3>Floor Level</h3>
+              <h1 className="Title-Text">Floor Level</h1>
             </div>
             <div className="Floor-Area">
-              <h3>Floor Area (sqm)</h3>
+              <h1 className="Title-Text">Floor Area (sqm)</h1>
             </div>
             <div className="Remaining-Lease">
-              <h3>Remaining Lease (years)</h3>
+              <h1 className="Title-Text">Remaining Lease (years)</h1>
             </div>
             <div className="Resale-Price">
-              <h3>Resale Price (SGD)</h3>
+              <h1 className="Title-Text">Resale Price (SGD)</h1>
             </div>
             {loggedInUser ? <div className="box"></div> : null}
             {loggedInUser ? <div className="box"></div> : null}
@@ -164,7 +164,7 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
               ) : null}
               {loggedInUser ? (
                 <Button className="box" onClick={() => removeData(message)}>
-                  delete
+                  Delete
                 </Button>
               ) : null}
               <Button className="box" onClick={() => openModal(message)}>

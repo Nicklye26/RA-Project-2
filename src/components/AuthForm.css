@@ -3,8 +3,10 @@
 }
 
 .Auth-Form-Wrapper {
+  background-color: #c6ac8f;
   border: 1px solid #cccccc;
   padding: 50px;
+  border-radius: 5px;
 }
 
 .Auth-Form-Logo {
@@ -26,8 +28,10 @@
 }
 
 .Toggle-Option-Container {
-  margin-top: 50px;
+  background-color: #c6ac8f;
+  margin-top: 20px;
   border: 1px solid #cccccc;
   padding: 15px 0;
   font-size: 1.4rem;
+  border-radius: 5px;
 }
