@@ -18,10 +18,11 @@ export const defaultState = {
 };
 
 function App() {
-  // Code to use later for checking whether user is logged in
   const [loggedInUser, setLoggedInUser] = useState();
   const [state, setState] = useState(defaultState);
   const [addMode, setAddMode] = useState(true);
+  const [isUpdateAlertVisible, setUpdateAlertVisible] = useState(false);
+  const [isDeleteAlertVisible, setDeleteAlertVisible] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -53,6 +54,8 @@ function App() {
       setState={setState}
       addMode={addMode}
       setAddMode={setAddMode}
+      isUpdateAlertVisible={isUpdateAlertVisible}
+      setUpdateAlertVisible={setUpdateAlertVisible}
     />
   );
   const composerAndTransFeed = (
@@ -65,6 +68,8 @@ function App() {
         setState={setState}
         addMode={addMode}
         setAddMode={setAddMode}
+        isDeleteAlertVisible={isDeleteAlertVisible}
+        setDeleteAlertVisible={setDeleteAlertVisible}
       />
     </div>
   );
