@@ -24,7 +24,15 @@ const MESSAGE_FOLDER_NAME = "messages";
 //   <Link to="authForm"></Link>
 // }
 
-const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
+const TransFeed = ({
+  loggedInUser,
+  state,
+  setState,
+  addMode,
+  setAddMode,
+  isDeleteAlertVisible,
+  setDeleteAlertVisible,
+}) => {
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
   const [mapLink, setMapLink] = useState("");
@@ -91,16 +99,25 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
   }, []);
 
   const updateData = (record) => {
+    // populate the textboxes; change to Edit mode and scroll to top of page
     state = record.val;
     setState(state);
     state.key = record.key;
     setAddMode(!addMode);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const removeData = (message) => {
+    let answer = window.confirm("Are you sure you wish to delete?");
+    if (!answer) return;
+
     remove(databaseRef(database, `messages/${message.key}`))
       .then(() => {
-        alert("Your post is removed!");
+        //alert("Your post is removed!");
+        setDeleteAlertVisible(true);
+        setTimeout(() => {
+          setDeleteAlertVisible(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log(error);
@@ -121,6 +138,11 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
 
   return (
     <>
+      {isDeleteAlertVisible && (
+        <div className="alert-container">
+          + <div className="alert-inner">Your post is deleted!</div>
+        </div>
+      )}
       <div className="Transfeed-Section">
         <div className="Transfeed-Table">
           <div className="Flex-Row-Titles">
@@ -173,7 +195,6 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
             </div>
           ))}
         </div>
-
         <ModalPopUp
           state={state}
           modal={modal}
@@ -187,23 +208,3 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
 };
 
 export default TransFeed;
-
-// original
-//   return messages.map((message) => (
-//     <Card key={message.key}>
-//       <Card.Img
-//         className="storage-image"
-//         src={message.val.imageLink}
-//         alt="image"
-//       />
-//       <Card.Text>
-//         {message.val.block}, {message.val.streetName}, {message.val.floorLevel};{" "}
-//         {message.val.floorArea} sqm
-//       </Card.Text>
-//       <Card.Text>
-//         {message.val.createdAt}: {message.val.remainingLease} years left | $
-//         {message.val.resalePrice}
-//       </Card.Text>
-//     </Card>
-//   ));
-// };

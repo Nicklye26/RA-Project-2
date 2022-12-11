@@ -14,7 +14,15 @@ import "./Composer.css";
 const MESSAGE_KEY = "messages";
 const IMAGES_FOLDER_NAME = "images";
 
-const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
+const Composer = ({
+  loggedInUser,
+  state,
+  setState,
+  addMode,
+  setAddMode,
+  isUpdateAlertVisible,
+  setUpdateAlertVisible,
+}) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
 
@@ -60,9 +68,14 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         yearLeaseStart: parseInt(state.yearLeaseStart),
         remainingLease: 99 - (new Date().getFullYear() - state.yearLeaseStart),
       };
-      // Reset input fields after submit
+      // Reset input fields after submit, and show message in Alert
       setState(defaultState);
       setAddMode(!addMode);
+      //let msg = alert("Your post is updated!", "test");
+      setUpdateAlertVisible(true);
+      setTimeout(() => {
+        setUpdateAlertVisible(false);
+      }, 3000);
 
       return update(messageListRef, updates);
     }
@@ -81,7 +94,7 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
         const newMessageRef = push(messageListRef);
         set(newMessageRef, {
           imageLink: downloadUrl,
-          //imageName: fileInputFile.name,
+          imageName: fileInputFile.name,
           createdAt: new Date().toLocaleDateString("en-GB"),
           authorEmail: loggedInUser.email,
           block: state.block,
@@ -93,10 +106,14 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
           remainingLease:
             99 - (new Date().getFullYear() - state.yearLeaseStart),
         });
-        // Reset input fields after submit
+        // Reset input fields after submit; then scroll to bottom of page
         setFileInputFile(null);
         setFileInputValue("");
         setState(defaultState);
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
       });
     });
   };
@@ -196,6 +213,11 @@ const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
             {addMode ? "Create" : "Save"}
           </Button>
         </form>
+        {isUpdateAlertVisible && (
+          <div className="alert-container">
+            + <div className="alert-inner">Your post is updated!</div>
+          </div>
+        )}
       </div>
     </>
   );

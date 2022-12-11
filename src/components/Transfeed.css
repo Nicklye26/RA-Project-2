@@ -2,6 +2,10 @@
   
 } */
 
+html {
+  scroll-behavior: smooth;
+}
+
 .Transfeed-Table {
   display: flex;
   flex-direction: column;
