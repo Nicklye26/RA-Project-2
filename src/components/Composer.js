@@ -60,6 +60,7 @@ const Composer = ({
         imageLink: state.imageLink,
         createdAt: new Date().toLocaleDateString("en-GB"),
         authorEmail: loggedInUser.email,
+        imageName: state.imageName,
         block: state.block,
         streetName: state.streetName,
         floorLevel: state.floorLevel,
@@ -71,7 +72,6 @@ const Composer = ({
       // Reset input fields after submit, and show message in Alert
       setState(defaultState);
       setAddMode(!addMode);
-      //let msg = alert("Your post is updated!", "test");
       setUpdateAlertVisible(true);
       setTimeout(() => {
         setUpdateAlertVisible(false);
