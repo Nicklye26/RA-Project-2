@@ -15,6 +15,7 @@ export const defaultState = {
   floorArea: "",
   yearLeaseStart: "",
   resalePrice: "",
+  imageName: "",
 };
 
 function App() {

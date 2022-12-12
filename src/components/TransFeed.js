@@ -180,12 +180,20 @@ const TransFeed = ({
               </div>
               <div className="Resale-Price">{message.val.resalePrice}</div>
               {loggedInUser ? (
-                <Button className="box" onClick={() => updateData(message)}>
+                <Button
+                  className="box"
+                  onClick={() => updateData(message)}
+                  disabled={message.val.authorEmail !== loggedInUser.email}
+                >
                   Edit
                 </Button>
               ) : null}
               {loggedInUser ? (
-                <Button className="box" onClick={() => removeData(message)}>
+                <Button
+                  className="box"
+                  onClick={() => removeData(message)}
+                  disabled={message.val.authorEmail !== loggedInUser.email}
+                >
                   Delete
                 </Button>
               ) : null}
