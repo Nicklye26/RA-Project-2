@@ -11,18 +11,11 @@ import { database, storage } from "../firebase";
 import "./App.css";
 import "./Transfeed.css";
 import ModalPopUp from "./ModalPopUp";
-// import AuthForm from "./AuthForm";
 import { defaultState } from "./App";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
 const MESSAGE_FOLDER_NAME = "messages";
-
-// Click on post to link to full details of post
-// const handleSubmit = () => {
-//   const authForm = <AuthForm />
-//   <Link to="authForm"></Link>
-// }
 
 const TransFeed = ({
   loggedInUser,
@@ -181,6 +174,7 @@ const TransFeed = ({
               <div className="Resale-Price">{message.val.resalePrice}</div>
               {loggedInUser ? (
                 <Button
+                  variant="warning"
                   className="box"
                   onClick={() => updateData(message)}
                   disabled={message.val.authorEmail !== loggedInUser.email}
@@ -190,6 +184,7 @@ const TransFeed = ({
               ) : null}
               {loggedInUser ? (
                 <Button
+                  variant="danger"
                   className="box"
                   onClick={() => removeData(message)}
                   disabled={message.val.authorEmail !== loggedInUser.email}
@@ -197,7 +192,11 @@ const TransFeed = ({
                   Delete
                 </Button>
               ) : null}
-              <Button className="box" onClick={() => openModal(message)}>
+              <Button
+                variant="info"
+                className="box"
+                onClick={() => openModal(message)}
+              >
                 More Info
               </Button>
             </div>

@@ -212,13 +212,17 @@ const Composer = ({
               disabled={!addMode}
             />
           </div>
-          <Button className="Create-Save-Button" onClick={handleSubmit}>
+          <Button
+            variant="secondary"
+            className="Create-Save-Button"
+            onClick={handleSubmit}
+          >
             {addMode ? "Create" : "Save"}
           </Button>
         </form>
         {isUpdateAlertVisible && (
           <div className="alert-container">
-            + <div className="alert-inner">Your post is updated!</div>
+            <h2 className="alert-inner">Your post is updated!</h2>
           </div>
         )}
       </div>

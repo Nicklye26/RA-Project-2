@@ -97,13 +97,7 @@ function App() {
     <div className="App">
       <div className="Nav-Bar">
         <Navbar className="Nav-Bar-Side" position="top" variant="dark">
-          <Navbar.Brand
-            onClick={
-              <Routes>
-                <Route path="home" element={<App />} />
-              </Routes>
-            }
-          >
+          <Navbar.Brand>
             <img
               src={require("../assets/Sales-of-Flats-Logo-500.png")}
               className="Navbar-Logo"
