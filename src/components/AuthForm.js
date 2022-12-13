@@ -67,7 +67,7 @@ const AuthForm = (props) => {
       <div className="Auth-Form-Container">
         <div className="Auth-Form-Wrapper">
           <img
-            src={require("../assets/Sales-of-Flats-Logo-500.png")}
+            src={require("../assets/Sales-of-Flats-Logo-Black-500.png")}
             className="Auth-Form-Logo"
             alt="AuthForm-Logo"
           />

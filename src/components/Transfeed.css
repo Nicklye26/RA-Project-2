@@ -10,7 +10,15 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 70vw;
+  width: 85rem;
+}
+
+@media (max-width: 1440px) {
+  .Transfeed-Table {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .Flex-Row-Titles {

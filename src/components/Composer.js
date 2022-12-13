@@ -47,8 +47,11 @@ const Composer = ({
     if (state.floorArea === 0 || state.resalePrice === 0) return;
     if (state.floorArea > 300 || state.floorArea < 0)
       return alert("Floor Area is non-negative and at most 300sqm!");
-    if (state.yearLeaseStart > 2017 || state.yearLeaseStart < 1980)
-      return alert("Year Lease Start can only be from 1980 to 2017!");
+    if (
+      state.yearLeaseStart > new Date().getFullYear() ||
+      state.yearLeaseStart < 1950
+    )
+      return alert("Please input a sensible Year Lease Start!");
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
 

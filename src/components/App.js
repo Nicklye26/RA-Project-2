@@ -94,29 +94,40 @@ function App() {
   };
 
   return (
-    <div className="App" id="home">
+    <div className="App">
       <div className="Nav-Bar">
         <Navbar className="Nav-Bar-Side" position="top" variant="dark">
-          <Navbar.Brand>
+          <Navbar.Brand
+            onClick={
+              <Routes>
+                <Route path="home" element={<App />} />
+              </Routes>
+            }
+          >
             <img
               src={require("../assets/Sales-of-Flats-Logo-500.png")}
               className="Navbar-Logo"
               alt="Website-Logo"
             />
           </Navbar.Brand>
-          {loggedInUser && loggedInUser.email ? (
-            <Nav>
-              <NavDropdown title={loggedInUser && loggedInUser.email}>
-                <NavDropdown.Item onClick={() => logOutUser()}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          ) : null}
+          <Navbar.Collapse className="justify-contnet-end">
+            <Navbar.Text>
+              {loggedInUser && loggedInUser.email ? (
+                <Nav className="justify-contnet-end">
+                  Signed in as:
+                  <NavDropdown title={loggedInUser && loggedInUser.email}>
+                    <NavDropdown.Item onClick={() => logOutUser()}>
+                      <h1 className="Navbar-Dropdown">Logout</h1>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              ) : null}
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Navbar>
       </div>
 
-      <header className="Right-Column">
+      <header className="Routes-Wrapper">
         <Routes>
           <Route path="/" element={composerAndTransFeed} />
           <Route path="authform" element={<AuthForm />} />
