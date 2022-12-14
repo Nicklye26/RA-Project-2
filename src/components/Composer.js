@@ -9,8 +9,7 @@ import { database, storage } from "../firebase";
 import { defaultState } from "./App";
 import { Button } from "react-bootstrap";
 import "./Composer.css";
-import { Link, useLocation } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
@@ -27,11 +26,11 @@ const Composer = ({
 }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
+  const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
 
   const isEditing = params.get("mode") === "edit";
-  console.log(isEditing);
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
@@ -62,6 +61,7 @@ const Composer = ({
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
 
+    navigate("/");
     let uid = state.key;
     if (uid) {
       const messageListRef = databaseRef(database, MESSAGE_KEY);
@@ -79,6 +79,7 @@ const Composer = ({
         yearLeaseStart: parseInt(state.yearLeaseStart),
         remainingLease: 99 - (new Date().getFullYear() - state.yearLeaseStart),
       };
+
       // Reset input fields after submit, and show message in Alert
       setState(defaultState);
       setAddMode(!addMode);
@@ -120,10 +121,6 @@ const Composer = ({
         setFileInputFile(null);
         setFileInputValue("");
         setState(defaultState);
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
       });
     });
   };
