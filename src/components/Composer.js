@@ -9,6 +9,8 @@ import { database, storage } from "../firebase";
 import { defaultState } from "./App";
 import { Button } from "react-bootstrap";
 import "./Composer.css";
+import { Link, useLocation } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
@@ -25,6 +27,11 @@ const Composer = ({
 }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const isEditing = params.get("mode") === "edit";
+  console.log(isEditing);
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
@@ -128,9 +135,10 @@ const Composer = ({
           Welcome, {loggedInUser ? loggedInUser.email : null}
         </h1>
         <p className="Composer-Paragraph">
-          Creata a post on your recent sale or check out the transaction table
-          below
+          Create a post on your recent sale or click on the Table link to view
+          all transactions.
         </p>
+        <Link to="/">Transaction Table</Link>
       </div>
       <div className="Transaction-Form">
         <form className="Input-Form">
@@ -180,6 +188,7 @@ const Composer = ({
               min="0"
               max="300"
               value={state.floorArea}
+              placeholder="max: 299"
               onChange={handleTextInputChange}
             />
             <label className="Label-Class">Year Lease Start: </label>
@@ -213,11 +222,11 @@ const Composer = ({
             />
           </div>
           <Button
-            variant="secondary"
+            variant="success"
             className="Create-Save-Button"
             onClick={handleSubmit}
           >
-            {addMode ? "Create" : "Save"}
+            {isEditing ? "Save" : "Create"}
           </Button>
         </form>
         {isUpdateAlertVisible && (

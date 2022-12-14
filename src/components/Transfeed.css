@@ -1,9 +1,32 @@
-/* .Transfeed-Section {
-  
-} */
+.Transfeed-Section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 html {
   scroll-behavior: smooth;
+}
+
+.Notes-Container {
+  width: 85rem;
+  font-size: 1.1rem;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.Notes-Title {
+  font-size: 5rem;
+}
+
+.Notes-Title-2 {
+  font-size: 2.5rem;
+}
+
+.Notes-Wrapper {
+  text-align: left;
 }
 
 .Transfeed-Table {
@@ -24,31 +47,34 @@ html {
 .Flex-Row-Titles {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   align-items: center;
-  background-color: #c47335;
+  background-color: #0b3d32;
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 2%;
+  padding-right: 2%;
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
+.Flex-Row:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .Flex-Row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   align-items: center;
   font-size: 1.2 rem;
   padding-top: 1%;
   padding-bottom: 1%;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-bottom: 1px solid #d1a483;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .Flex-Column {
@@ -63,35 +89,55 @@ html {
 }
 
 .Block-Row {
-  width: 6%;
+  width: 10%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .Street-Name {
-  width: 18%;
+  width: 20%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .Floor-Level {
-  width: 8%;
+  width: 15%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .Floor-Area {
   width: 10%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .Remaining-Lease {
   width: 15%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .Resale-Price {
-  width: 9.5%;
+  width: 10%;
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .box {
-  width: 9%;
+  width: 10%;
+}
+
+.Button-Wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 234px;
+}
+
+.Button-Wrapper * {
+  margin-left: 10px;
+}
+
+.More-Info-Btn {
+  margin-left: auto;
 }

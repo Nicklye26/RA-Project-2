@@ -44,7 +44,7 @@
 }
 
 .modal-header {
-  background-color: #c47335;
+  background-color: #0b3d32;
   color: white;
   width: 100%;
   font-size: 1.5rem;
@@ -56,7 +56,7 @@
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
-  padding: 2px 16px;
+  gap: 2%;
 }
 
 .modal-footer {
@@ -69,6 +69,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+}
+
+.Details-Transaction-Wrapper {
+  padding-left: 3%;
+  width: 100%;
+}
+
+.Modal-Right-Wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .storage-image {
@@ -78,10 +92,13 @@
 .Card-Text-Title {
   font-size: 1.5rem;
   margin-top: 10px;
+  text-decoration: underline;
 }
 
 .Card-Text-Text {
+  padding-left: 2%;
   font-size: 1.2rem;
+  color: grey;
 }
 
 /* Add Animation */

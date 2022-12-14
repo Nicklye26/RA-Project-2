@@ -1,7 +1,7 @@
 import "./App.css";
 import AuthForm from "./AuthForm.js";
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Composer from "./Composer.js";
 import TransFeed from "./TransFeed.js";
 import { auth } from "../firebase";
@@ -24,6 +24,7 @@ function App() {
   const [addMode, setAddMode] = useState(true);
   const [isUpdateAlertVisible, setUpdateAlertVisible] = useState(false);
   const [isDeleteAlertVisible, setDeleteAlertVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -40,12 +41,23 @@ function App() {
   }, []);
 
   const loginButton = (
-    <div>
-      <Link to="authform" className="Home-Create-Sign-In-Link">
-        Create Account Or Sign In
-      </Link>
+    <>
+      <div>
+        <Link to="authform" className="Home-Create-Sign-In-Link">
+          Create Account Or Sign In
+        </Link>
+      </div>
       <br />
-    </div>
+      <TransFeed
+        loggedInUser={loggedInUser}
+        state={state}
+        setState={setState}
+        addMode={addMode}
+        setAddMode={setAddMode}
+        isDeleteAlertVisible={isDeleteAlertVisible}
+        setDeleteAlertVisible={setDeleteAlertVisible}
+      />
+    </>
   );
 
   const composer = (
@@ -59,20 +71,21 @@ function App() {
       setUpdateAlertVisible={setUpdateAlertVisible}
     />
   );
+
+  const transactionTable = (
+    <TransFeed
+      loggedInUser={loggedInUser}
+      state={state}
+      setState={setState}
+      addMode={addMode}
+      setAddMode={setAddMode}
+      isDeleteAlertVisible={isDeleteAlertVisible}
+      setDeleteAlertVisible={setDeleteAlertVisible}
+    />
+  );
+
   const composerAndTransFeed = (
-    <div>
-      {loggedInUser ? composer : loginButton}
-      <br />
-      <TransFeed
-        loggedInUser={loggedInUser}
-        state={state}
-        setState={setState}
-        addMode={addMode}
-        setAddMode={setAddMode}
-        isDeleteAlertVisible={isDeleteAlertVisible}
-        setDeleteAlertVisible={setDeleteAlertVisible}
-      />
-    </div>
+    <div>{loggedInUser ? transactionTable : loginButton}</div>
   );
 
   const logOutUser = () => {
@@ -93,23 +106,32 @@ function App() {
       });
   };
 
+  const createPost = () => {
+    navigate("/create");
+  };
+
   return (
     <div className="App">
       <div className="Nav-Bar">
         <Navbar className="Nav-Bar-Side" position="top" variant="dark">
           <Navbar.Brand>
-            <img
-              src={require("../assets/Sales-of-Flats-Logo-500.png")}
-              className="Navbar-Logo"
-              alt="Website-Logo"
-            />
+            <Link to="/">
+              <img
+                src={require("../assets/Sales-of-Flats-Logo-500.png")}
+                className="Navbar-Logo"
+                alt="Website-Logo"
+              />
+            </Link>
           </Navbar.Brand>
-          <Navbar.Collapse className="justify-contnet-end">
+          <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               {loggedInUser && loggedInUser.email ? (
-                <Nav className="justify-contnet-end">
+                <Nav className="justify-content-end">
                   Signed in as:
                   <NavDropdown title={loggedInUser && loggedInUser.email}>
+                    <NavDropdown.Item onClick={() => createPost()}>
+                      <h1 className="Navbar-Dropdown">Create</h1>
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={() => logOutUser()}>
                       <h1 className="Navbar-Dropdown">Logout</h1>
                     </NavDropdown.Item>
@@ -125,6 +147,8 @@ function App() {
         <Routes>
           <Route path="/" element={composerAndTransFeed} />
           <Route path="authform" element={<AuthForm />} />
+          <Route path="table" element={transactionTable} />
+          <Route path="create" element={composer} />
         </Routes>
       </header>
     </div>

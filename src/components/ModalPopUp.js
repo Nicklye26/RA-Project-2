@@ -17,25 +17,33 @@ const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
             alt="image"
           />
           <br />
-          <h1 className="Card-Text-Title">Address: </h1>
-          <h2 className="Card-Text-Text">
-            Blk {state.block}, {state.streetName}
-          </h2>
-          <h1 className="Card-Text-Title">Remaining Lease Left: </h1>
-          <h2 className="Card-Text-Text">{state.remainingLease} years left</h2>
-          <h1 className="Card-Text-Title">Sold by: </h1>
-          <h2 className="Card-Text-Text">{state.authorEmail}</h2>
-          <h1 className="Card-Text-Title">Created on: </h1>
-          <h2 className="Card-Text-Text">{state.createdAt}</h2>
+          <div className="Details-Transaction-Wrapper">
+            <h1 className="Card-Text-Title">Address: </h1>
+            <h2 className="Card-Text-Text">
+              Blk {state.block}, {state.streetName}
+            </h2>
+            <h1 className="Card-Text-Title">Floor Level: </h1>
+            <h2 className="Card-Text-Text">{state.floorLevel}</h2>
+            <h1 className="Card-Text-Title">Resale Price: </h1>
+            <h2 className="Card-Text-Text">${state.resalePrice}</h2>
+            <h1 className="Card-Text-Title">Remaining Lease Left: </h1>
+            <h2 className="Card-Text-Text">
+              {state.remainingLease} years left
+            </h2>
+            <h1 className="Card-Text-Title">Sold by: </h1>
+            <h2 className="Card-Text-Text">{state.authorEmail}</h2>
+            <h1 className="Card-Text-Title">Created on: </h1>
+            <h2 className="Card-Text-Text">{state.createdAt}</h2>
+          </div>
         </div>
-        <div>
+        <div className="Modal-Right-Wrapper">
           <Card.Img src={mapLink} alt="image" />
         </div>
         {errorMessage ? `${errorMessage}` : null}
       </Modal.Body>
       <Modal.Footer className="modal-footer">
-        <Button className="close" color="primary" onClick={closeModal}>
-          OK
+        <Button className="close" variant="info" onClick={closeModal}>
+          Close
         </Button>
       </Modal.Footer>
     </Modal>

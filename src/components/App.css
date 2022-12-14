@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #ddd5d0;
+  background-color: #f4f3f0;
   font-size: calc(10px + 2vmin);
   color: black;
   padding-bottom: 5%;
@@ -21,7 +21,7 @@
 }
 
 .Nav-Bar {
-  background-color: #3c3c3b;
+  background-color: #0b3d32;
   padding-top: 1%;
   box-shadow: rgb(0 0 0 / 50%) 1px 0px 8px 5px;
   font-size: 1.5rem;
@@ -35,7 +35,7 @@
   font-size: 1.2rem;
 }
 
-.justify-contnet-end {
+.justify-content-end {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -43,7 +43,7 @@
 
 .Navbar-Logo {
   object-fit: cover;
-  width: 200px;
+  width: 125px;
   margin-bottom: 20px;
 }
 
