@@ -9,6 +9,7 @@ import { database, storage } from "../firebase";
 import { defaultState } from "./App";
 import { Button } from "react-bootstrap";
 import "./Composer.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const MESSAGE_KEY = "messages";
@@ -25,6 +26,11 @@ const Composer = ({
 }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const isEditing = params.get("mode") === "edit";
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
@@ -47,11 +53,15 @@ const Composer = ({
     if (state.floorArea === 0 || state.resalePrice === 0) return;
     if (state.floorArea > 300 || state.floorArea < 0)
       return alert("Floor Area is non-negative and at most 300sqm!");
-    if (state.yearLeaseStart > 2017 || state.yearLeaseStart < 1980)
-      return alert("Year Lease Start can only be from 1980 to 2017!");
+    if (
+      state.yearLeaseStart > new Date().getFullYear() ||
+      state.yearLeaseStart < 1950
+    )
+      return alert("Please input a sensible Year Lease Start!");
     if (state.resalePrice > 2000000 || state.resalePrice < 0)
       return alert("Resale Price is non-negative and at most $2,000,000");
 
+    navigate("/");
     let uid = state.key;
     if (uid) {
       const messageListRef = databaseRef(database, MESSAGE_KEY);
@@ -69,6 +79,7 @@ const Composer = ({
         yearLeaseStart: parseInt(state.yearLeaseStart),
         remainingLease: 99 - (new Date().getFullYear() - state.yearLeaseStart),
       };
+
       // Reset input fields after submit, and show message in Alert
       setState(defaultState);
       setAddMode(!addMode);
@@ -110,10 +121,6 @@ const Composer = ({
         setFileInputFile(null);
         setFileInputValue("");
         setState(defaultState);
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
       });
     });
   };
@@ -125,9 +132,10 @@ const Composer = ({
           Welcome, {loggedInUser ? loggedInUser.email : null}
         </h1>
         <p className="Composer-Paragraph">
-          Creata a post on your recent sale or check out the transaction table
-          below
+          Create a post on your recent sale or click on the Table link to view
+          all transactions.
         </p>
+        <Link to="/">Transaction Table</Link>
       </div>
       <div className="Transaction-Form">
         <form className="Input-Form">
@@ -177,6 +185,7 @@ const Composer = ({
               min="0"
               max="300"
               value={state.floorArea}
+              placeholder="max: 299"
               onChange={handleTextInputChange}
             />
             <label className="Label-Class">Year Lease Start: </label>
@@ -209,13 +218,17 @@ const Composer = ({
               disabled={!addMode}
             />
           </div>
-          <Button className="Create-Save-Button" onClick={handleSubmit}>
-            {addMode ? "Create" : "Save"}
+          <Button
+            variant="success"
+            className="Create-Save-Button"
+            onClick={handleSubmit}
+          >
+            {isEditing ? "Save" : "Create"}
           </Button>
         </form>
         {isUpdateAlertVisible && (
           <div className="alert-container">
-            + <div className="alert-inner">Your post is updated!</div>
+            <h2 className="alert-inner">Your post is updated!</h2>
           </div>
         )}
       </div>

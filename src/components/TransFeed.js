@@ -11,18 +11,12 @@ import { database, storage } from "../firebase";
 import "./App.css";
 import "./Transfeed.css";
 import ModalPopUp from "./ModalPopUp";
-// import AuthForm from "./AuthForm";
 import { defaultState } from "./App";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const MESSAGE_FOLDER_NAME = "messages";
-
-// Click on post to link to full details of post
-// const handleSubmit = () => {
-//   const authForm = <AuthForm />
-//   <Link to="authForm"></Link>
-// }
 
 const TransFeed = ({
   loggedInUser,
@@ -37,6 +31,7 @@ const TransFeed = ({
   const [modal, setModal] = useState(false);
   const [mapLink, setMapLink] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const openModal = (record) => {
     state = record.val;
@@ -83,6 +78,7 @@ const TransFeed = ({
         { key: data.key, val: data.val() },
       ]);
     });
+
     onChildChanged(messageRef, (data) => {
       setMessages((prevState) =>
         prevState.map((item) =>
@@ -104,7 +100,7 @@ const TransFeed = ({
     setState(state);
     state.key = record.key;
     setAddMode(!addMode);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    navigate("/create?mode=edit");
   };
 
   const removeData = (message) => {
@@ -140,10 +136,41 @@ const TransFeed = ({
     <>
       {isDeleteAlertVisible && (
         <div className="alert-container">
-          + <div className="alert-inner">Your post is deleted!</div>
+          <div className="alert-inner">Your post is deleted!</div>
         </div>
       )}
       <div className="Transfeed-Section">
+        <div className="Notes-Container">
+          <h1 className="Notes-Title">Table of transaction</h1>
+          <h2 className="Notes-Title-2">Resale of HDB</h2>
+          <br />
+          <div className="Notes-Wrapper">
+            <h3>Notes</h3>
+            <ul>
+              1. The approximate floor area includes any recess area purchased,
+              space adding item under HDB's upgrading programmes, roof terrace,
+              etc.
+            </ul>
+            <ul>
+              2. The transactions exclude resale transactions that may not
+              reflect the full market price such as resale between relatives and
+              resale of part shares.
+            </ul>
+            <ul>
+              3. Resale prices should be taken as indicative only as the resale
+              prices agreed between buyers and sellers are dependent on many
+              factors.
+            </ul>
+            <ul>
+              4. Remaining lease is the number of years, months and days left
+              before the lease expires. The information is computed as at the
+              resale flat application and has been rounded up to the nearest
+              month for the purpose of CPF monies usage and HDB loan
+              application.
+            </ul>
+          </div>
+        </div>
+        <br />
         <div className="Transfeed-Table">
           <div className="Flex-Row-Titles">
             <div className="Block-Row">
@@ -164,9 +191,11 @@ const TransFeed = ({
             <div className="Resale-Price">
               <h1 className="Title-Text">Resale Price (SGD)</h1>
             </div>
-            {loggedInUser ? <div className="box"></div> : null}
-            {loggedInUser ? <div className="box"></div> : null}
-            <div className="box"></div>
+            <div className="Button-Wrapper">
+              {loggedInUser ? <div className="box"></div> : null}
+              {loggedInUser ? <div className="box"></div> : null}
+              <div className="box"></div>
+            </div>
           </div>
 
           {messages.map((message, val) => (
@@ -179,27 +208,27 @@ const TransFeed = ({
                 {message.val.remainingLease}
               </div>
               <div className="Resale-Price">{message.val.resalePrice}</div>
-              {loggedInUser ? (
+              <div className="Button-Wrapper">
+                {loggedInUser &&
+                message.val.authorEmail === loggedInUser.email ? (
+                  <Button variant="warning" onClick={() => updateData(message)}>
+                    Edit
+                  </Button>
+                ) : null}
+                {loggedInUser &&
+                message.val.authorEmail === loggedInUser.email ? (
+                  <Button variant="danger" onClick={() => removeData(message)}>
+                    Delete
+                  </Button>
+                ) : null}
                 <Button
-                  className="box"
-                  onClick={() => updateData(message)}
-                  disabled={message.val.authorEmail !== loggedInUser.email}
+                  variant="info"
+                  className="More-Info-Btn"
+                  onClick={() => openModal(message)}
                 >
-                  Edit
+                  More Info
                 </Button>
-              ) : null}
-              {loggedInUser ? (
-                <Button
-                  className="box"
-                  onClick={() => removeData(message)}
-                  disabled={message.val.authorEmail !== loggedInUser.email}
-                >
-                  Delete
-                </Button>
-              ) : null}
-              <Button className="box" onClick={() => openModal(message)}>
-                More Info
-              </Button>
+              </div>
             </div>
           ))}
         </div>

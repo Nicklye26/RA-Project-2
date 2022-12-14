@@ -9,7 +9,6 @@ import { Button } from "react-bootstrap";
 import "./AuthForm.css";
 
 const AuthForm = (props) => {
-  // const [displayName, setDisplayName] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isNewUser, setIsNewUser] = useState(true);
@@ -25,12 +24,7 @@ const AuthForm = (props) => {
     setPasswordInput(e.target.value);
   };
 
-  // const handleUserNameInputChange = (e) => {
-  //   setDisplayName(e.target.value);
-  // };
-
   const closeAuthForm = () => {
-    // setDisplayName("");
     setEmailInput("");
     setPasswordInput("");
     setIsNewUser(true);
@@ -67,21 +61,11 @@ const AuthForm = (props) => {
       <div className="Auth-Form-Container">
         <div className="Auth-Form-Wrapper">
           <img
-            src={require("../assets/Sales-of-Flats-Logo-500.png")}
+            src={require("../assets/Sales-of-Flats-Logo-Black-500.png")}
             className="Auth-Form-Logo"
             alt="AuthForm-Logo"
           />
           <p>{errorMessage ? `${errorMessage}` : null}</p>
-          {/* to work on username later */}
-          {/* <label>
-        <input
-          type="text"
-          name="username"
-          value={displayName}
-          onChange={handleUserNameInputChange}
-          placeholder="Username"
-        />
-      </label> */}
 
           <label className="Auth-Form-Label">
             <input
