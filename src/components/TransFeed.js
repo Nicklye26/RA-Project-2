@@ -11,24 +11,19 @@ import { database, storage } from "../firebase";
 import "./App.css";
 import "./Transfeed.css";
 import ModalPopUp from "./ModalPopUp";
+import DeletedModal from "./DeletedModal";
 import { defaultState } from "./App";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const MESSAGE_FOLDER_NAME = "messages";
 
-const TransFeed = ({
-  loggedInUser,
-  state,
-  setState,
-  addMode,
-  setAddMode,
-  isDeleteAlertVisible,
-  setDeleteAlertVisible,
-}) => {
+const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
+  const [deleteBtnModal, setDeleteBtnModal] = useState(false);
+  // const [deleteConfirmation , setDeleteConfirmation] = useState(false)
   const [mapLink, setMapLink] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -110,10 +105,11 @@ const TransFeed = ({
     remove(databaseRef(database, `messages/${message.key}`))
       .then(() => {
         //alert("Your post is removed!");
-        setDeleteAlertVisible(true);
+        // setDeleteConfirmation(true)
+        setDeleteBtnModal(true);
         setTimeout(() => {
-          setDeleteAlertVisible(false);
-        }, 3000);
+          setDeleteBtnModal(false);
+        }, 2500);
       })
       .catch((error) => {
         console.log(error);
@@ -134,11 +130,6 @@ const TransFeed = ({
 
   return (
     <>
-      {isDeleteAlertVisible && (
-        <div className="alert-container">
-          <div className="alert-inner">Your post is deleted!</div>
-        </div>
-      )}
       <div className="Transfeed-Section">
         <div className="Notes-Container">
           <h1 className="Notes-Title">Table of transaction</h1>
@@ -211,23 +202,41 @@ const TransFeed = ({
               <div className="Button-Wrapper">
                 {loggedInUser &&
                 message.val.authorEmail === loggedInUser.email ? (
-                  <Button variant="warning" onClick={() => updateData(message)}>
-                    Edit
-                  </Button>
+                  <button
+                    className="Btn-Edit"
+                    onClick={() => updateData(message)}
+                  >
+                    <img
+                      src={require("../assets/Button-edit.png")}
+                      className="Btn-Image"
+                      alt="edit-button"
+                    />
+                  </button>
                 ) : null}
                 {loggedInUser &&
                 message.val.authorEmail === loggedInUser.email ? (
-                  <Button variant="danger" onClick={() => removeData(message)}>
-                    Delete
-                  </Button>
+                  <button
+                    className="Btn-Trash"
+                    onClick={() => removeData(message)}
+                  >
+                    <img
+                      src={require("../assets/Button-trash.png")}
+                      className="Btn-Image"
+                      alt="trash-button"
+                    />
+                  </button>
                 ) : null}
-                <Button
+                <button
                   variant="info"
                   className="More-Info-Btn"
                   onClick={() => openModal(message)}
                 >
-                  More Info
-                </Button>
+                  <img
+                    src={require("../assets/Button-info.png")}
+                    className="Btn-Image"
+                    alt="info-button"
+                  />
+                </button>
               </div>
             </div>
           ))}
@@ -239,6 +248,7 @@ const TransFeed = ({
           mapLink={mapLink}
           errorMessage={errorMessage}
         />
+        <DeletedModal modal={deleteBtnModal} />
       </div>
     </>
   );

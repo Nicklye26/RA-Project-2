@@ -7,7 +7,6 @@ import {
 } from "firebase/storage";
 import { database, storage } from "../firebase";
 import { defaultState } from "./App";
-import { Button } from "react-bootstrap";
 import "./Composer.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -135,7 +134,9 @@ const Composer = ({
           Create a post on your recent sale or click on the Table link to view
           all transactions.
         </p>
-        <Link to="/">Transaction Table</Link>
+        <Link to="/" className="Link-To-Table">
+          Transaction Table
+        </Link>
       </div>
       <div className="Transaction-Form">
         <form className="Input-Form">
@@ -218,13 +219,13 @@ const Composer = ({
               disabled={!addMode}
             />
           </div>
-          <Button
+          <button
             variant="success"
             className="Create-Save-Button"
             onClick={handleSubmit}
           >
             {isEditing ? "Save" : "Create"}
-          </Button>
+          </button>
         </form>
         {isUpdateAlertVisible && (
           <div className="alert-container">

@@ -143,14 +143,14 @@ function App() {
         </Navbar>
       </div>
 
-      <header className="Routes-Wrapper">
+      <main className="Routes-Wrapper">
         <Routes>
           <Route path="/" element={composerAndTransFeed} />
           <Route path="authform" element={<AuthForm />} />
           <Route path="table" element={transactionTable} />
           <Route path="create" element={composer} />
         </Routes>
-      </header>
+      </main>
     </div>
   );
 }

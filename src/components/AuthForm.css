@@ -1,9 +1,10 @@
 .Auth-Form-Container {
   padding: 10px;
+  height: 100vh;
 }
 
 .Auth-Form-Wrapper {
-  background-color: #d8cbc0;
+  background-color: #d7ddd8;
   border: 2px solid rgba(60, 60, 59, 0.25);
   padding: 50px;
   border-radius: 5px;
@@ -20,18 +21,42 @@
   height: 40px;
   margin-bottom: 10px;
   font-size: 1.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
   border: 1px solid #cccccc;
 }
 
 .Sign-In-Log-In-Button {
   width: 300px;
+  background-color: #1b98e0;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.Sign-In-Log-In-Button:hover {
+  background-color: #007cdb;
 }
 
 .Toggle-Option-Container {
-  background-color: #d8cbc0;
+  background-color: #d7ddd8;
   margin-top: 20px;
   border: 2px solid rgba(60, 60, 59, 0.25);
   padding: 15px 0;
   font-size: 1.4rem;
   border-radius: 5px;
+}
+
+.Toggle-New-Or-Returning {
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.Toggle-New-Or-Returning:hover {
+  color: #007cdb;
 }

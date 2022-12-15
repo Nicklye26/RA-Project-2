@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import "./AuthForm.css";
 
 const AuthForm = (props) => {
@@ -90,16 +89,19 @@ const AuthForm = (props) => {
             />
           </label>
           <br />
-          <Button className="Sign-In-Log-In-Button" onClick={handleSubmit}>
+          <button className="Sign-In-Log-In-Button" onClick={handleSubmit}>
             {isNewUser ? "Sign Up" : "Log In"}
-          </Button>
+          </button>
         </div>
         <div className="Toggle-Option-Container">
-          <Button variant="link" onClick={toggleNewOrReturningAuth}>
+          <button
+            className="Toggle-New-Or-Returning"
+            onClick={toggleNewOrReturningAuth}
+          >
             {isNewUser
               ? "Have an account? Log In"
               : "Don't have an account? Sign Up"}
-          </Button>
+          </button>
         </div>
       </div>
     </>
