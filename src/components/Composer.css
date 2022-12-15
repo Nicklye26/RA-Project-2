@@ -52,6 +52,17 @@
 .Create-Save-Button {
   margin-left: auto;
   margin-right: auto;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  background-color: #466b61;
+  color: white;
+  font-weight: bold;
+}
+
+.Create-Save-Button:hover {
+  background-color: #0b3d31;
 }
 
 .alert-container {
@@ -81,4 +92,14 @@
   -webkit-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
   -moz-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
   z-index: 1;
+}
+
+.Link-To-Table {
+  color: #466b61;
+  text-decoration: none;
+}
+
+.Link-To-Table:hover {
+  color: #0b3d31;
+  text-decoration: underline;
 }

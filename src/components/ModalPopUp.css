@@ -28,19 +28,22 @@
   animation-duration: 0.4s;
 }
 
-/* The Close Button */
-.close {
+.Close-Modal {
+  background-color: #d62839;
   color: white;
-  float: right;
-  font-size: 28px;
+  font-size: 1.5rem;
   font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
+.Close-Modal:hover,
+.Close-Modal:focus {
+  filter: brightness(107%);
   text-decoration: none;
   cursor: pointer;
+  box-shadow: rgb(0 0 0 / 50%) 2px 3px 3px 0px;
 }
 
 .modal-header {

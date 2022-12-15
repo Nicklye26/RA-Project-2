@@ -48,8 +48,14 @@
 }
 
 .Home-Create-Sign-In-Link {
-  color: black;
+  color: #466b61;
   font-size: 1.6rem;
+  text-decoration: none;
+}
+
+.Home-Create-Sign-In-Link:hover {
+  color: #0b3d31;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

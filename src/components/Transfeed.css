@@ -95,13 +95,13 @@ html {
 }
 
 .Street-Name {
-  width: 20%;
+  width: 15%;
   font-size: 1.2rem;
   text-align: left;
 }
 
 .Floor-Level {
-  width: 15%;
+  width: 10%;
   font-size: 1.2rem;
   text-align: left;
 }
@@ -113,7 +113,7 @@ html {
 }
 
 .Remaining-Lease {
-  width: 15%;
+  width: 12%;
   font-size: 1.2rem;
   text-align: left;
 }
@@ -131,13 +131,44 @@ html {
 .Button-Wrapper {
   display: flex;
   justify-content: space-between;
-  width: 234px;
+  width: 210px;
 }
 
 .Button-Wrapper * {
-  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
 }
 
 .More-Info-Btn {
   margin-left: auto;
+  width: 60px;
+  height: 60px;
+}
+
+.Btn-Image {
+  width: 40px;
+}
+
+.Btn-Image:hover {
+  filter: brightness(110%);
+}
+
+.Btn-Edit {
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
+}
+
+.Btn-Trash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
 }

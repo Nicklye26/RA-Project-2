@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "./ModalPopUp.css";
 
 const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
@@ -42,9 +42,9 @@ const ModalPopUp = ({ state, modal, closeModal, mapLink, errorMessage }) => {
         {errorMessage ? `${errorMessage}` : null}
       </Modal.Body>
       <Modal.Footer className="modal-footer">
-        <Button className="close" variant="info" onClick={closeModal}>
+        <button className="Close-Modal" onClick={closeModal}>
           Close
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );
