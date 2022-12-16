@@ -12,9 +12,9 @@ export const defaultState = {
   block: "",
   streetName: "",
   floorLevel: "1 to 4",
-  floorArea: "",
-  yearLeaseStart: "",
-  resalePrice: "",
+  floorArea: 0,
+  yearLeaseStart: 1990,
+  resalePrice: 0,
   imageName: "",
 };
 
@@ -22,7 +22,6 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState();
   const [state, setState] = useState(defaultState);
   const [addMode, setAddMode] = useState(true);
-  const [isUpdateAlertVisible, setUpdateAlertVisible] = useState(false);
   const [isDeleteAlertVisible, setDeleteAlertVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -67,8 +66,6 @@ function App() {
       setState={setState}
       addMode={addMode}
       setAddMode={setAddMode}
-      isUpdateAlertVisible={isUpdateAlertVisible}
-      setUpdateAlertVisible={setUpdateAlertVisible}
     />
   );
 

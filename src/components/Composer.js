@@ -14,15 +14,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const MESSAGE_KEY = "messages";
 const IMAGES_FOLDER_NAME = "images";
 
-const Composer = ({
-  loggedInUser,
-  state,
-  setState,
-  addMode,
-  setAddMode,
-  isUpdateAlertVisible,
-  setUpdateAlertVisible,
-}) => {
+const Composer = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
   const [fileInputFile, setFileInputFile] = useState();
   const [fileInputValue, setFileInputValue] = useState("");
   const navigate = useNavigate();
@@ -82,10 +74,6 @@ const Composer = ({
       // Reset input fields after submit, and show message in Alert
       setState(defaultState);
       setAddMode(!addMode);
-      setUpdateAlertVisible(true);
-      setTimeout(() => {
-        setUpdateAlertVisible(false);
-      }, 3000);
 
       return update(messageListRef, updates);
     }
@@ -227,11 +215,6 @@ const Composer = ({
             {isEditing ? "Save" : "Create"}
           </button>
         </form>
-        {isUpdateAlertVisible && (
-          <div className="alert-container">
-            <h2 className="alert-inner">Your post is updated!</h2>
-          </div>
-        )}
       </div>
     </>
   );
