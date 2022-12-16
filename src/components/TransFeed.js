@@ -14,7 +14,6 @@ import ModalPopUp from "./ModalPopUp";
 import DeletedModal from "./DeletedModal";
 import { defaultState } from "./App";
 import axios from "axios";
-// import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const MESSAGE_FOLDER_NAME = "messages";
@@ -23,7 +22,6 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
   const [messages, setMessages] = useState([]);
   const [modal, setModal] = useState(false);
   const [deleteBtnModal, setDeleteBtnModal] = useState(false);
-  // const [deleteConfirmation , setDeleteConfirmation] = useState(false)
   const [mapLink, setMapLink] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -32,7 +30,6 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
     state = record.val;
     setState(state);
     setModal(true);
-    //if (!state.block || !state.streetName) return;
     getOneMap(state.block + " " + state.streetName);
   };
 
@@ -137,28 +134,30 @@ const TransFeed = ({ loggedInUser, state, setState, addMode, setAddMode }) => {
           <br />
           <div className="Notes-Wrapper">
             <h3>Notes</h3>
-            <ul>
-              1. The approximate floor area includes any recess area purchased,
-              space adding item under HDB's upgrading programmes, roof terrace,
-              etc.
-            </ul>
-            <ul>
-              2. The transactions exclude resale transactions that may not
-              reflect the full market price such as resale between relatives and
-              resale of part shares.
-            </ul>
-            <ul>
-              3. Resale prices should be taken as indicative only as the resale
-              prices agreed between buyers and sellers are dependent on many
-              factors.
-            </ul>
-            <ul>
-              4. Remaining lease is the number of years, months and days left
-              before the lease expires. The information is computed as at the
-              resale flat application and has been rounded up to the nearest
-              month for the purpose of CPF monies usage and HDB loan
-              application.
-            </ul>
+            <ol>
+              <li>
+                The approximate floor area includes any recess area purchased,
+                space adding item under HDB's upgrading programmes, roof
+                terrace, etc.
+              </li>
+              <li>
+                The transactions exclude resale transactions that may not
+                reflect the full market price such as resale between relatives
+                and resale of part shares.
+              </li>
+              <li>
+                Resale prices should be taken as indicative only as the resale
+                prices agreed between buyers and sellers are dependent on many
+                factors.
+              </li>
+              <li>
+                Remaining lease is the number of years, months and days left
+                before the lease expires. The information is computed as at the
+                resale flat application and has been rounded up to the nearest
+                month for the purpose of CPF monies usage and HDB loan
+                application.
+              </li>
+            </ol>
           </div>
         </div>
         <br />
